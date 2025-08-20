@@ -10,7 +10,7 @@ module CLA (
 wire g[0:15];
 wire p[0:15];
 wire c[0:16];
-wire temp [0:15];
+wire temp [0:100];
 
 // Generate g and p functions
 genvar i;
@@ -21,14 +21,62 @@ generate
     end
 endgenerate
 
-// Carries logic
+//######### Carries logic #########
+
+// Carry 0
 assign c[0]  = Ci_i;
+
+// Carry 1
+// (and2, or2)
 assign c[1]  = g[0]  | (p[0]  & c[0]);
+
+// Carry 2
+// (and2, and3, or3)
 assign c[2]  = g[1]  | (p[1]  & g[0])  | (p[1]  & p[0]  & c[0]) ;
+
+// Carry 3
+// (and2 to and4, or4)
 assign c[3]  = g[2]  | (p[2]  & g[1])  | (p[2]  & p[1]  & g[0])  | (p[2]  & p[1]  & p[0]  & c[0]);
-assign c[4]  = g[3]  | (p[3]  & g[2])  | (p[3]  & p[2]  & g[1])  | (p[3]  & p[2]  & p[1]  & g[0])  | (p[3]  & p[2]  & p[1]  & p[0]  & c[0]);
-assign c[5]  = g[4]  | (p[4]  & g[3])  | (p[4]  & p[3]  & g[2])  | (p[4]  & p[3]  & p[2]  & g[1])  | (p[4]  & p[3]  & p[2]  & p[1]  & g[0])  | (p[4]  & p[3]  & p[2]  & p[1]  & p[0]  & c[0]);
-assign c[6]  = g[5]  | (p[5]  & g[4])  | (p[5]  & p[4]  & g[3])  | (p[5]  & p[4]  & p[3]  & g[2])  | (p[5]  & p[4]  & p[3]  & p[2]  & g[1])  | (p[5]  & p[4]  & p[3]  & p[2]  & p[1]  & g[0])  | (p[5]  & p[4]  & p[3]  & p[2]  & p[1]  & p[0]  & c[0]);
+
+// Carry 4
+// (and2 to and5, or5) -> (3 and2, 2 and3, and4, 2 or2, or3)
+// assign c[4]   = g[3]  | (p[3]  & g[2])  | (p[3]  & p[2]  & g[1])  | (p[3]  & p[2]  & p[1]  & g[0])  | (p[3]  & p[2]  & p[1]  & p[0]  & c[0]);
+assign temp[0]  = p[3] & p[2]  & p[1];
+assign temp[1]  = p[0] & c[0];
+assign temp[2]  = temp[0] & temp[1];
+assign temp[3]  = g[3] | (p[3] & g[2]) | (p[3] & p[2] & g[1]);
+assign temp[4]  = (p[3]  & p[2]  & p[1]  & g[0]) | temp[2];
+assign c[4]     = temp[3] | temp[4];
+
+// Carry 5
+// (and2 to and6, or6) -> (4 and2 ,4 and3, and4, or3 ,or4)
+// assign c[5]  = g[4]  | (p[4]  & g[3])  | (p[4]  & p[3]  & g[2])  | (p[4]  & p[3]  & p[2]  & g[1])  | (p[4]  & p[3]  & p[2]  & p[1]  & g[0])  | (p[4]  & p[3]  & p[2]  & p[1]  & p[0]  & c[0]);
+assign temp[5]  = p[4] & p[3] & p[2];
+assign temp[6]  = p[1] & p[0] & c[0];
+assign temp[7]  = temp[5] & temp[6];
+assign temp[8]  = p[4]  & p[3]  & p[2];
+assign temp[9]  = p[1]  & g[0];
+assign temp[10] = temp[8] & temp[9];
+assign temp[11] = g[4]  | (p[4]  & g[3])  | (p[4]  & p[3]  & g[2])  | (p[4]  & p[3]  & p[2]  & g[1]);
+assign c[5]     =  temp[11] | temp[10]  | temp[7];
+
+// Carry 6 
+// (and3 to and7, or7) -> (and2, and3, 2and4, or2, or3, or4)
+//assign c[6]  = g[5]  | (p[5]  & g[4])  | (p[5]  & p[4]  & g[3])  | (p[5]  & p[4]  & p[3]  & g[2])  | (p[5]  & p[4]  & p[3]  & p[2]  & g[1])  | (p[5]  & p[4]  & p[3]  & p[2]  & p[1]  & g[0])  | (p[5]  & p[4]  & p[3]  & p[2]  & p[1]  & p[0]  & c[0]);
+assign temp[12] = p[5] & p[4] & p[3]  & p[2];
+assign temp[13] = p[1] & p[0] & c[0];
+assign temp[14] = temp[12] & temp[13];
+assign temp[15] = p[5] & p[4] & p[3];
+assign temp[16] = p[2] & p[1] & g[0];
+assign temp[17] = temp[15] & temp[16];
+assign temp[18] = p[5] & p[4] & p[3];
+assign temp[19] = p[2] & g[1];
+assign temp[20] = temp[18] & temp[19];
+assign temp[21] = g[5]  | (p[5]  & g[4])  | (p[5]  & p[4]  & g[3])  | (p[5]  & p[4]  & p[3]  & g[2]);
+assign c[6]  = temp[21] | temp[20] | temp[17] | temp[14];
+
+
+
 assign c[7]  = g[6]  | (p[6]  & g[5])  | (p[6]  & p[5]  & g[4])  | (p[6]  & p[5]  & p[4]  & g[3])  | (p[6]  & p[5]  & p[4]  & p[3]  & g[2])  | (p[6]  & p[5]  & p[4]  & p[3]  & p[2]  & g[1])  | (p[6]  & p[5]  & p[4]  & p[3]  & p[2]  & p[1]  & g[0]) | (p[6]  & p[5]  & p[4]  & p[3]  & p[2]  & p[1]  & p[0] & c[0]);
 assign c[8]  = g[7]  | (p[7]  & g[6])  | (p[7]  & p[6]  & g[5])  | (p[7]  & p[6]  & p[5]  & g[4])  | (p[7]  & p[6]  & p[5]  & p[4]  & g[3])  | (p[7]  & p[6]  & p[5]  & p[4]  & p[3]  & g[2])  | (p[7]  & p[6]  & p[5]  & p[4]  & p[3]  & p[2]  & g[1]) | (p[7]  & p[6]  & p[5]  & p[4]  & p[3]  & p[2]  & p[1] & g[0]) | (p[7]  & p[6]  & p[5]  & p[4]  & p[3]  & p[2]  & p[1] & p[0] & c[0]);
 assign c[9]  = g[8]  | (p[8]  & g[7])  | (p[8]  & p[7]  & g[6])  | (p[8]  & p[7]  & p[6]  & g[5])  | (p[8]  & p[7]  & p[6]  & p[5]  & g[4])  | (p[8]  & p[7]  & p[6]  & p[5]  & p[4]  & g[3])  | (p[8]  & p[7]  & p[6]  & p[5]  & p[4]  & p[3]  & g[2]) | (p[8]  & p[7]  & p[6]  & p[5]  & p[4]  & p[3]  & p[2] & g[1]) | (p[8]  & p[7]  & p[6]  & p[5]  & p[4]  & p[3]  & p[2] & p[1] & g[0]) | (p[8]  & p[7]  & p[6]  & p[5]  & p[4]  & p[3]  & p[2] & p[1] & p[0] & c[0]);
