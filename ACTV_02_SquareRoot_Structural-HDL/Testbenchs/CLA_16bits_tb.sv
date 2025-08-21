@@ -5,7 +5,9 @@ reg Ci_i;
 wire [15:0] S_o;
 wire Co_o;
 
-CLA DUV (
+//CLA DUV (
+//CLA4x4 DUV (
+CLA2x8 DUV (
     .A_i(A_i),
     .B_i(B_i),
     .Ci_i(Ci_i),
@@ -18,6 +20,9 @@ task test_result (
         input logic Co_exp
     ); begin
 
+		$display(  "| A_i=%h  B_i=%h  Ci_i=%b | S_o=%h Co_o=%b | %0d",
+                    	 A_i, B_i, Ci_i, S_o, Co_o, $time);
+
             if(S_o !== S_exp)
                 print_error($sformatf("%s should be %h at time %0d", "S_o", S_exp, $time ));
             else if(Co_o !== Co_exp)
@@ -26,8 +31,7 @@ task test_result (
     endtask
 
     task print_error (input string message); begin
-			$display(  "| A_i=%h  B_i=%h  Ci_i=%b | S_o=%h Co_o=%b | %0d",
-                    	 A_i, B_i, Ci_i, S_o, Co_o, $time);
+			
             $display(  "+----------------------------+-----------------+------------+");
             $display(  "|                           TEST FAILED!! ");
             $display(  "|  %s", message);
@@ -51,7 +55,7 @@ task test_result (
 		Ci_i = inputs[32];
 		outputs = A_i + B_i + Ci_i;
 		#1 test_result(outputs[15:0], outputs[16]);
-		inputs = inputs + 1;
+		inputs = inputs + 307;
 	end
 initial begin
 clk = 0;
