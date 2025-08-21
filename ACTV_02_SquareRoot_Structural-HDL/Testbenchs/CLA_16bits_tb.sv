@@ -18,9 +18,6 @@ task test_result (
         input logic Co_exp
     ); begin
 
-            $display(  "| A_i=%h  B_i=%h  Ci_i=%b | S_o=%h Co_o=%b | %0d",
-                     A_i, B_i, Ci_i, S_o, Co_o, $time);
-
             if(S_o !== S_exp)
                 print_error($sformatf("%s should be %h at time %0d", "S_o", S_exp, $time ));
             else if(Co_o !== Co_exp)
@@ -29,6 +26,8 @@ task test_result (
     endtask
 
     task print_error (input string message); begin
+			$display(  "| A_i=%h  B_i=%h  Ci_i=%b | S_o=%h Co_o=%b | %0d",
+                    	 A_i, B_i, Ci_i, S_o, Co_o, $time);
             $display(  "+----------------------------+-----------------+------------+");
             $display(  "|                           TEST FAILED!! ");
             $display(  "|  %s", message);
@@ -37,6 +36,29 @@ task test_result (
         end
     endtask
 
+	logic clk;
+	logic [32:0] inputs;
+	logic [16:0] outputs; 
+
+	always #1 clk <= ~clk;
+	always@ (posedge clk) begin
+		if(inputs == '1) begin
+			$display("TEST PASSED");
+			$finish;
+		end
+		A_i  = inputs[15:0];
+		B_i  = inputs[31:16];
+		Ci_i = inputs[32];
+		outputs = A_i + B_i + Ci_i;
+		#1 test_result(outputs[15:0], outputs[16]);
+		inputs = inputs + 1;
+	end
+initial begin
+clk = 0;
+	inputs = '0;
+	outputs = '0; 
+end
+/*
 initial begin
 
 	$display("\n+----------------------------+-----------------+------------+");
@@ -188,6 +210,10 @@ initial begin
 	A_i=16'h0FFF; B_i=16'h987E; Ci_i=0;
 	#5 test_result(16'hA87D, 0);               //355ns
 
+	//3FFC + 0000+ 0
+	A_i=16'h3FFc; B_i=16'h0000; Ci_i=0;
+	#5 test_result(16'h3FFC, 0);               //365ns
+
 	$display("+----------------------------+-----------------+------------+");
     $display("|                         TEST PASSED                       |");
     $display("+-----------------------------------------------------------+\n\n");
@@ -195,6 +221,6 @@ initial begin
 	$finish;
 
 
-end
+end*/
 
 endmodule
