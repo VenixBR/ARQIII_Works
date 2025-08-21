@@ -26,6 +26,8 @@ endgenerate
 
 //######### Carries logic #########
 
+assign Co_o = c[WIDTH];
+
 generate
     // Carry 0
     assign c[0]  = Ci_i;
@@ -477,5 +479,4 @@ generate
 
 endgenerate
 
-assign Co_o = c[WIDTH];
 endmodule
