@@ -1,5 +1,0 @@
-module ControlPath (
-
-);
-
-endmodule 
