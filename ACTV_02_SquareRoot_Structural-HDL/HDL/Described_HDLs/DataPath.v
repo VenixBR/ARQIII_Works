@@ -23,18 +23,21 @@ module DataPath #(
 // ###       INTERNAL SIGNALS       ###
 // ####################################
 
-wire valor_ext_s;
-wire square_init_ext_s;
-wire root_ext_s;
+wire [16:0] valor_ext_s;
+wire [16:0] square_init_ext_s;
+wire [16:0] root_ext_s;
 
-wire mux_square_s;
-wire mux_root_s;
+wire [16:0] mux_square_s;
+wire  [7:0] mux_root_s;
 
-wire root_s;
-wire square_s;
-wire root_incremented_s;
-wire square_added_s;
-
+wire  [7:0] root_s;
+wire [16:0] square_s;
+wire [16:0] not_square_s;
+wire  [7:0] root_incremented_s;
+wire [16:0] square_added_s;
+wire [16:0] adder_in_up_s;
+wire [16:0] adder_in_down_s;
+wire [16:0] root_shifted_s;
 
 
 // ####################################
@@ -50,8 +53,14 @@ assign root_ext_s = {9'b000000000,  root_s};
 // ###  INSTATIATION OF COMPONENTS  ###
 // ####################################
 
+assign not_square_s = !square_s;
+assign root_o = root_s;
+assign N_o = square_added_s[16];
+
+// MUXES
+
 mux_2_1 #(
-    .DATA_WIDTH(16)
+    .DATA_WIDTH(17)
 ) SQUARE_MUX (
     .A0    ( square_added_s    ),
     .A1    ( square_init_ext_s ),
@@ -60,13 +69,33 @@ mux_2_1 #(
 );
 
 mux_2_1 #(
-    .DATA_WIDTH(16)
+    .DATA_WIDTH(8)
 ) ROOT_MUX (
     .A0    ( root_incremented_s ),
     .A1    ( root_init_ext_s    ),
     .s0    ( boot_i             ),
     .result( mux_root_s         )
 );
+
+mux_2_1 #(
+    .DATA_WIDTH(17)
+) ADDER_IN_UP (
+    .A0    ( square_s      ),
+    .A1    ( not_square_s  ),
+    .s0    ( muxes_i       ),
+    .result( adder_in_up_s )
+);
+
+mux_2_1 #(
+    .DATA_WIDTH(17)
+) ADDER_IN_DOWN (
+    .A0    ( root_shifted_s  ),
+    .A1    ( valor_ext_s     ),
+    .s0    ( muxes_i         ),
+    .result( adder_in_down_s )
+);
+
+// REGISTERS
 
 gen_reg #(
     .REG_WIDTH(17)
@@ -90,6 +119,35 @@ gen_reg #(
     .dataout( root_s     )
 ); 
 
-CLA #()
+// ADDERS
+
+CLA #(
+    .WIDTH(17)
+) SQUARE_ADDER (
+    .A_i ( adder_in_up_s   ),
+    .B_i ( adder_in_down_s ),
+    .Ci_i( muxes_i         ),
+    .S_o ( square_added_s  ),
+    .Co_o(                 )
+);
+
+CLA #(
+    .WIDTH(8)
+) ROOT_ADDER (
+    .A_i ( root_s             ),
+    .B_i ( ROOT_INC           ),
+    .Ci_i( 1'b0               ),
+    .S_o ( root_incremented_s ),
+    .Co_o(                    )
+);
+
+// SHIFTER
+
+leftShifter #(
+    .SHIFT(ROOT_SFT)
+) SHIFTER_NETS (
+    .in_i ( root_ext_s     ),
+    .out_o( root_shifted_s )
+);
 
 endmodule

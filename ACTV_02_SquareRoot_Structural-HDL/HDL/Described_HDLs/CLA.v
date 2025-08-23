@@ -1,5 +1,5 @@
 module CLA #(
-    parameter WIDTH = 16
+    parameter WIDTH = 17
 )(
     input  wire [WIDTH-1:0] A_i,
     input  wire [WIDTH-1:0] B_i,
@@ -12,7 +12,7 @@ module CLA #(
 wire g[WIDTH-1:0];
 wire p[WIDTH-1:0];
 wire c[WIDTH:0];
-wire t[361:0]; // temporary nets
+wire t[423:0]; // temporary nets
 
 // Generate g and p functions and the sum out
 genvar i;
@@ -412,22 +412,12 @@ generate
 
     // Carry 16
     if(WIDTH >= 16) begin
-        // assign t[300] = p[15]  & p[14]  & p[13];            //vv - And17
-        // assign t[301] = p[12]  & p[11]  & p[10];            //
-        // assign t[302] = p[9]   & p[8]   & p[7];             //
-        // assign t[303] = p[6]   & p[5]   & p[4];             //
-        // assign t[304] = p[3]   & p[2]   & p[1];             //
-        // assign t[305] = p[0]   & c[0];                      //
-        // assign t[306] = t[300] & t[301] & t[302];           //
-        // assign t[307] = t[303] & t[304] & t[305];           //
-        // assign t[308] = t[306] & t[307];                    //
-
         assign t[300] = p[15]  & p[14]  & p[13]  & p[12];   // vv - And17
         assign t[301] = p[11]  & p[10]  & p[9]   & p[8];    //
         assign t[302] = p[7]   & p[6]   & p[5]   & p[4];    //
         assign t[303] = p[3]   & p[2]   & p[1]   & p[0];    //
         assign t[304] = t[300] & t[301] & t[302];           //
-        assign t[305] = t[303] & [304]  & c[0];             // 
+        assign t[305] = t[303] & t[304]  & c[0];             // 
         assign t[306] = p[15]  & p[14]  & p[13]  & p[12];   // vv - And16
         assign t[307] = p[11]  & p[10]  & p[9]   & p[8];    //
         assign t[308] = p[7]   & p[6]   & p[5]   & p[4];    //
@@ -473,94 +463,88 @@ generate
         assign t[348] = p[15]  & p[14]  & p[13]  & g[12];
         assign t[349] = p[15]  & p[14]  & g[13];
         assign t[350] = p[15]  & g[14];
-
-        assign t[351] = t[305] | t[310] | t[315] | t[320];   // vv - Or17
-        assign t[352] = t[324] | t[328] | t[332] | t[335];   //
-        assign t[353] = t[338] | t[341] | t[343] | t[345];   //
-        assign t[354] = t[347] | t[348] | t[349] | t[350];   //
-        assign t[355] = t[351] | t[352] | t[353];            //
-        assign c[16]  = t[354] | t[355] | g[15];             // 
-
-
-        // assign t[354] = t[305] | t[310] | t[315];            //vv - And17
-        // assign t[355] = t[320] | t[324] | t[328];            //
-        // assign t[356] = t[332] | t[335] | t[338];            //
-        // assign t[357] = t[341] | t[343] | t[345];            //
-        // assign t[358] = t[347] | t[348] | t[349];            //
-        // assign t[359] = t[350] | g[15];                      //
-        // assign t[360] = t[354] | t[355] | t[356];            //
-        // assign t[361] = t[357] | t[358] | t[359];            //
-        // assign c[16]  = t[360] | t[361];                     //
+        assign t[351] = t[305] | t[310] | t[315] | t[320];  // vv - Or17
+        assign t[352] = t[324] | t[328] | t[332] | t[335];  //
+        assign t[353] = t[338] | t[341] | t[343] | t[345];  //
+        assign t[354] = t[347] | t[348] | t[349] | t[350];  //
+        assign t[355] = t[351] | t[352] | t[353];           //
+        assign c[16]  = t[354] | t[355] | g[15];            // 
     end
 
-/*
+
     // Carry 17
     if(WIDTH >= 17) begin
-        assign t[] = p[15]  & p[14]  & p[13];            //vv - And17
-        assign t[] = p[12]  & p[11]  & p[10];            //
-        assign t[] = p[9]   & p[8]   & p[7];             //
-        assign t[] = p[6]   & p[5]   & p[4];             //
-        assign t[] = p[3]   & p[2]   & p[1];             //
-        assign t[] = p[0]   & c[0];                      //
-        assign t[] = t[300] & t[301] & t[302];           //
-        assign t[] = t[303] & t[304] & t[305];           //
-        assign t[] = t[306] & t[307];                    //
-        assign t[] = p[15]  & p[14]  & p[13]  & p[12];   // vv - And16
-        assign t[] = p[11]  & p[10]  & p[9]   & p[8];    //
-        assign t[] = p[7]   & p[6]   & p[5]   & p[4];    //
-        assign t[] = p[3]   & p[2]   & p[1]   & g[0];    //
-        assign t[] = t[309] & t[310] & t[311] & t[312];  //
-        assign t[] = p[15]  & p[14]  & p[13]  & p[12];   // vv - And15
-        assign t[] = p[11]  & p[10]  & p[9]   & p[8];    //
-        assign t[] = p[7]   & p[6]   & p[5]   & p[4];    //
-        assign t[] = p[3]   & p[2]   & g[1];             //
-        assign t[] = t[314] & t[315] & t[316] & t[317];  //
-        assign t[] = p[15]  & p[14]  & p[13]  & p[12];   // vv - And14
-        assign t[] = p[11]  & p[10]  & p[9]   & p[8];    //
-        assign t[] = p[7]   & p[6]   & p[5];             //
-        assign t[] = p[4]   & p[3]   & g[2];             //
-        assign t[] = t[319] & t[320] & t[321] & t[322];  //
-        assign t[] = p[15]  & p[14]  & p[13]  & p[12];   // vv - And13
-        assign t[] = p[11]  & p[10]  & p[9]   & p[8];    //
-        assign t[] = p[7]   & p[6]   & p[5]   & p[4];    //
-        assign t[] = t[324] & t[325] & t[326] & g[3];    //
-        assign t[] = p[15]  & p[14]  & p[13]  & p[12];   // vv - And12
-        assign t[] = p[11]  & p[10]  & p[9]   & p[8];    //
-        assign t[] = p[7]   & p[6]   & p[5]   & g[4];    // 
-        assign t[] = t[328] & t[329] & t[330];           //
-        assign t[] = p[15]  & p[14]  & p[13]  & p[12];   // vv - And11
-        assign t[] = p[11]  & p[10]  & p[9]   & p[8];    //
-        assign t[] = p[7]   & p[6]   & g[5];             //
-        assign t[] = t[332] & t[333] & t[334];           //
-        assign t[] = p[15]  & p[14]  & p[13]  & p[12];   // vv - And10
-        assign t[] = p[11]  & p[10]  & p[9]   & p[8];    //
-        assign t[] = t[336] & t[337] & p[7]   & g[6];    //
-        assign t[] = p[15]  & p[14]  & p[13]  & p[12];   // vv - And9
-        assign t[] = p[11]  & p[10]  & p[9]   & p[8];    //
-        assign t[] = t[339] & t[340] & g[7];             //
-        assign t[] = p[15]  & p[14]  & p[13]  & p[12];   // vv - And8
-        assign t[] = p[11]  & p[10]  & p[9]   & g[8];    // 
-        assign t[] = t[342] & t[343];                    //
-        assign t[] = p[15]  & p[14]  & p[13]  & p[12];   // vv - And7
-        assign t[] = t[345] & p[11]  & p[10]  & g[9];    //
-        assign t[] = p[15]  & p[14]  & p[13]  & p[12];   // vv - And6
-        assign t[] = t[347] & p[11]  & g[10];            //
-        assign t[] = p[15]  & p[14]  & p[13]  & p[12];   // vv - And5
-        assign t[] = t[349] & g[11];                     //
-        assign t[] = p[15]  & p[14]  & p[13]  & g[12];
-        assign t[] = p[15]  & p[14]  & g[13];
-        assign t[] = p[15]  & g[14];
-        assign t[] = t[308] | t[313] | t[318];            //vv - And17
-        assign t[] = t[323] | t[327] | t[331];            //
-        assign t[] = t[335] | t[338] | t[341];            //
-        assign t[] = t[344] | t[346] | t[348];            //
-        assign t[] = t[350] | t[351] | t[352];            //
-        assign t[] = t[353] | g[15];                      //
-        assign t[] = t[354] | t[355] | t[356];            //
-        assign t[] = t[357] | t[358] | t[359];            //
-        assign c[17]  = t[360] | t[361];                     //
+        assign t[356] = p[16]  & p[15]  & p[14];            // vv - And18
+        assign t[357] = p[13]  & p[12]  & p[11];            //
+        assign t[358] = p[10]  & p[9]   & p[8];             //
+        assign t[359] = p[7]   & p[6]   & p[5];             //
+        assign t[360] = p[4]   & p[3]   & p[2];             //
+        assign t[361] = p[1]   & p[0]   & c[0];             //
+        assign t[362] = t[356] & t[357] & t[358];           //
+        assign t[363] = t[359] & t[360] & t[361];           //
+        assign t[364] = t[362] & t[363];                    //
+        assign t[365] = p[16]  & p[15]  & p[14]  & p[13];   // vv - And17
+        assign t[366] = p[12]  & p[11]  & p[10]  & p[9];    //
+        assign t[367] = p[8]   & p[7]   & p[9]   & p[5];    //
+        assign t[368] = p[4]   & p[3]   & p[2]   & p[1];    //
+        assign t[369] = t[365] & t[366] & t[367];           //
+        assign t[370] = t[368] & t[369] & g[0];             // 
+        assign t[371] = p[16]  & p[15]  & p[14]  & p[13];   // vv - And16
+        assign t[372] = p[12]  & p[11]  & p[10]  & p[9];    //
+        assign t[373] = p[8]   & p[7]   & p[9]   & p[5];    //
+        assign t[374] = p[4]   & p[3]   & p[2]   & g[1];    //
+        assign t[375] = t[371] & t[372] & t[373] & t[374];  //
+        assign t[376] = p[16]  & p[15]  & p[14]  & p[13];   // vv - And15
+        assign t[377] = p[12]  & p[11]  & p[10]  & p[9];    //
+        assign t[378] = p[8]   & p[7]   & p[9]   & p[5];    //
+        assign t[379] = p[4]   & p[3]   & g[2];             //
+        assign t[380] = t[376] & t[377] & t[378] & t[379];  //
+        assign t[381] = p[16]  & p[15]  & p[14]  & p[13];   // vv - And14
+        assign t[382] = p[12]  & p[11]  & p[10]  & p[9];    //
+        assign t[383] = p[8]   & p[7]   & p[6];             //
+        assign t[384] = p[5]   & p[4]   & g[3];             //
+        assign t[385] = t[381] & t[382] & t[383] & t[384];  //
+        assign t[386] = p[16]  & p[15]  & p[14]  & p[13];   // vv - And13
+        assign t[387] = p[12]  & p[11]  & p[10]  & p[9];    //
+        assign t[388] = p[8]   & p[7]   & p[9]   & p[5];    //
+        assign t[389] = t[386] & t[387] & t[388] & g[4];    //
+        assign t[390] = p[16]  & p[15]  & p[14]  & p[13];   // vv - And12
+        assign t[391] = p[12]  & p[11]  & p[10]  & p[9];    //
+        assign t[392] = p[8]   & p[7]   & p[6]   & g[5];    // 
+        assign t[393] = t[390] & t[391] & t[392];           //
+        assign t[394] = p[16]  & p[15]  & p[14]  & p[13];   // vv - And11
+        assign t[395] = p[12]  & p[11]  & p[10]  & p[9];    //
+        assign t[396] = p[8]   & p[7]   & g[6];             //
+        assign t[397] = t[394] & t[395] & t[396];           //
+        assign t[398] = p[16]  & p[15]  & p[14]  & p[13];   // vv - And10
+        assign t[399] = p[12]  & p[11]  & p[10]  & p[9];    //
+        assign t[400] = t[398] & t[399] & p[8]   & g[7];    //
+        assign t[401] = p[16]  & p[15]  & p[14]  & p[13];   // vv - And9
+        assign t[402] = p[12]  & p[11]  & p[10]  & p[9];    //
+        assign t[403] = t[401] & t[402] & g[8];             //
+        assign t[404] = p[16]  & p[15]  & p[14]  & p[13];   // vv - And8
+        assign t[405] = p[12]  & p[11]  & p[10]  & g[9];    // 
+        assign t[406] = t[404] & t[405];                    //
+        assign t[407] = p[16]  & p[15]  & p[14]  & p[13];   // vv - And7
+        assign t[408] = t[407] & p[12]  & p[11]  & g[10];   //
+        assign t[409] = p[16]  & p[15]  & p[14]  & p[13];   // vv - And6
+        assign t[410] = t[409] & p[12]  & g[11];            //
+        assign t[411] = p[16]  & p[15]  & p[14]  & p[13];   // vv - And5
+        assign t[412] = t[411] & g[12];                     //
+        assign t[413] = p[16]  & p[15]  & p[14]  & g[13];
+        assign t[414] = p[16]  & p[15]  & g[14];
+        assign t[415] = p[16]  & g[15];
+        assign t[416] = t[364] | t[370] | t[375];           // vv - Or18
+        assign t[417] = t[380] | t[385] | t[389];           //
+        assign t[418] = t[393] | t[397] | t[400];           //
+        assign t[419] = t[403] | t[406] | t[408];           //
+        assign t[420] = t[410] | t[412] | t[413];           //
+        assign t[421] = t[414] | t[415] | g[16];            //
+        assign t[422] = t[416] | t[417] | t[418];           //
+        assign t[423] = t[419] | t[420] | t[421];           //
+        assign c[17]  = t[422] | t[423];                    //
     end
-*/
+
 endgenerate
 
 endmodule

@@ -31,10 +31,22 @@ CLA4x4:
 		xrun -v2001 ${RTL_DIR}/Described_HDLs/CLA.v ${RTL_DIR}/Described_HDLs/CLA4x4.v ${TESTS_DIR}/CLA_16bits_tb.sv $(FLAGS) +define+CLA4x4; \
 	fi
 
+leftShifter:
+	cd ${ROOT}/Work && \
+	if [ "$(TB)" = "0" ]; then \
+		xrun -v2001 ${RTL_DIR}/Described_HDLs/leftShifter.v $(FLAGS); \
+	else \
+		xrun -v2001 ${RTL_DIR}/Described_HDLs/leftShifter.v ${TESTS_DIR}/leftShifter_tb.sv $(FLAGS) +define+CLA4x4; \
+	fi
+
 ControlPath:
 	cd ${ROOT}/Work && \
 	if [ "$(TB)" = "0" ]; then \
-		xrun -v2001 ${RTL_DIR}/Described_HDLs/ControlPath.v $(FLAGS); \
+		xrun -v2001  ${RTL_DIR}/Described_HDLs/ControlPath.v $(FLAGS); \
 	else \
-		xrun -v2001 ${RTL_DIR}/Described_HDLs/ControlPath.v ${TESTS_DIR}/ControlPath_tb.sv $(FLAGS); \
+		xrun -v201 ${RTL_DIR}/Described_HDLs/ControlPath.v ${TESTS_DIR}/ControlPath_tb.sv $(FLAGS); \
 	fi
+
+DataPath:
+	cd ${ROOT}/Work && \
+	xrun -v2001 -v93 -f ${ROOT}/filelist.flist $(FLAGS); \
