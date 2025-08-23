@@ -12,8 +12,7 @@ module ControlPath (
     output reg ready_o,
     output reg wr_root_o,
     output reg wr_square_o,
-    output reg root_o,
-    output wire CurState
+    output reg root_o
 );
 
     // States codification
@@ -27,7 +26,6 @@ module ControlPath (
     reg  [1:0] CurrentState;
     reg  [1:0] NextState;
 
-    assign CurState = CurrentState;
     // Next state logic
     always@* begin
         case( CurrentState )

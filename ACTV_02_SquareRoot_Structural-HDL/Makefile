@@ -4,7 +4,7 @@ TESTS_DIR  = ${ROOT}/Testbenchs
 GUI        ?= 0
 TB         ?= 1
 ifeq ($(GUI),1)
-	FLAGS += -gui
+	FLAGS += -access +rwc -gui
 endif
 
 CLA:
