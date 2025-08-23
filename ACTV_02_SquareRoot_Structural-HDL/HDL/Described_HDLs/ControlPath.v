@@ -1,7 +1,7 @@
 module ControlPath (
 
     input  wire clk,
-    input  wire rst,
+    input  wire rst_n,
 
     // Flags
     input  wire [1:0] N_i,
@@ -38,7 +38,7 @@ module ControlPath (
 
     // State memory logic
     always@( posedge clk , posedge rst) begin
-        if( rst == 1) begin
+        if( rst_n == 1'b0) begin
             CurrentState <= S0;
         end
         else begin
