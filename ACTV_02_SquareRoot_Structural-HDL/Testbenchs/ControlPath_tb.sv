@@ -1,12 +1,12 @@
 module ControlPath_tb;
 
-logic clk, rst;
+logic clk, rst_n;
 logic [1:0] N_i;
 logic boot_o, muxes_o, ready_o, wr_root_o, wr_square_o, root_o;
 
 ControlPath DUV (
     .clk        ( clk         ),
-    .rst        ( rst         ),
+    .rst_n        ( rst_n         ),
     .N_i        ( N_i         ),
     .boot_o     ( boot_o      ),
     .muxes_o    ( muxes_o     ),
@@ -59,8 +59,8 @@ initial begin
 	
     //  boot_exp, muxes_exp, wr_root_exp, wr_square_exp, root_exp, ready_exp
 
-    clk = 0; rst = 1; N_i[1] = 0; N_i[0] = 0;
-    #1 rst=0;                 test_result(1,'x,1,1,'x,1,"S0");    // 1ns
+    clk = 0; rst_n = 0; N_i[1] = 0; N_i[0] = 0;
+    #1 rst_n=1;               test_result(1,'x,1,1,'x,1,"S0");    // 1ns
     #1 N_i[1]=0; N_i[0]=1;    test_result(1,'x,1,1,'x,1,"S0");    // 2ns
     #1 N_i[1]=1; N_i[0]=0;    test_result(1,'x,1,1,'x,1,"S0");    // 3ns
     #1 N_i[1]=1; N_i[0]=1;    test_result(1,'x,1,1,'x,1,"S0");    // 4ns 

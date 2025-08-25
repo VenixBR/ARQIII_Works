@@ -44,9 +44,18 @@ ControlPath:
 	if [ "$(TB)" = "0" ]; then \
 		xrun -v2001  ${RTL_DIR}/Described_HDLs/ControlPath.v $(FLAGS); \
 	else \
-		xrun -v201 ${RTL_DIR}/Described_HDLs/ControlPath.v ${TESTS_DIR}/ControlPath_tb.sv $(FLAGS); \
+		xrun -v2001 ${RTL_DIR}/Described_HDLs/ControlPath.v ${TESTS_DIR}/ControlPath_tb.sv $(FLAGS); \
 	fi
 
 DataPath:
 	cd ${ROOT}/Work && \
-	xrun -v2001 -v93 -f ${ROOT}/filelist.flist $(FLAGS); \
+	xrun -v2001 -v93 -f ${ROOT}/filelist_DP.flist $(FLAGS); \
+
+Top:
+	cd ${ROOT}/Work && \
+	if [ "$(TB)" = "0" ]; then \
+		xrun -v2001 -v93 -f ${ROOT}/filelist_TOP.flist $(FLAGS); \
+	else \
+		xrun -v2001 -v93 -f ${ROOT}/filelist_TOP.flist ${TESTS_DIR}/Top_tb.sv $(FLAGS); \
+	fi
+

@@ -7,7 +7,7 @@ module DataPath #(
     input  wire clk,
     input  wire rst_n,
     input  wire [15:0] valor_i,
-    output wire [15:0] root_o,
+    output wire [7:0] root_o,
 
     // Control signals
     input  wire boot_i,
@@ -53,7 +53,7 @@ assign root_ext_s = {9'b000000000,  root_s};
 // ###  INSTATIATION OF COMPONENTS  ###
 // ####################################
 
-assign not_square_s = !square_s;
+assign not_square_s = ~square_s;
 assign root_o = root_s;
 assign N_o = square_added_s[16];
 
@@ -72,7 +72,7 @@ mux_2_1 #(
     .DATA_WIDTH(8)
 ) ROOT_MUX (
     .A0    ( root_incremented_s ),
-    .A1    ( root_init_ext_s    ),
+    .A1    ( root_init          ),
     .s0    ( boot_i             ),
     .result( mux_root_s         )
 );
