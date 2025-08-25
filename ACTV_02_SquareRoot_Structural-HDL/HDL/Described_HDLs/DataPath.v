@@ -72,7 +72,7 @@ mux_2_1 #(
     .DATA_WIDTH(8)
 ) ROOT_MUX (
     .A0    ( root_incremented_s ),
-    .A1    ( root_init          ),
+    .A1    ( ROOT_INIT          ),
     .s0    ( boot_i             ),
     .result( mux_root_s         )
 );

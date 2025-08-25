@@ -19,6 +19,7 @@ wire root_s;
 
 // Datapath outputs
 wire [7:0] root_1_s;
+wire [7:0] root_2_s;
 
 wire [15:0] valor_s;
 
@@ -47,7 +48,7 @@ ControlPath CONTROL_PATH(
     .boot_o(boot_s),
     .muxes_o(muxes_s),
     .ready_o(ready_o),
-    .wr_root_o(wr_root_s)
+    .wr_root_o(wr_root_s),
     .wr_square_o(wr_square_s),
     .root_o(root_s)
 );
@@ -64,7 +65,7 @@ DataPath #(
     .root_o(root_1_s),
     .boot_i(boot_s),
     .wr_square_i(wr_square_s),
-    .wr_square_i(wr_root_s),
+    .wr_root_i(wr_root_s),
     .muxes_i(muxes_s),
     .N_o(N_s[0])
 );
@@ -81,7 +82,7 @@ DataPath #(
     .root_o(root_2_s),
     .boot_i(boot_s),
     .wr_square_i(wr_square_s),
-    .wr_square_i(wr_root_s),
+    .wr_root_i(wr_root_s),
     .muxes_i(muxes_s),
     .N_o(N_s[1])
 );

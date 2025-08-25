@@ -54,8 +54,8 @@ DataPath:
 Top:
 	cd ${ROOT}/Work && \
 	if [ "$(TB)" = "0" ]; then \
-		xrun -v2001 -v93 -f ${ROOT}/filelist_TOP.flist $(FLAGS); \
+		xrun -v2001 -v93 -f ${ROOT}/filelist_Top.flist $(FLAGS); \
 	else \
-		xrun -v2001 -v93 -f ${ROOT}/filelist_TOP.flist ${TESTS_DIR}/Top_tb.sv $(FLAGS); \
+		xrun -v2001 -v93 -f ${ROOT}/filelist_Top.flist ${TESTS_DIR}/Top_tb.sv $(FLAGS); \
 	fi
 
