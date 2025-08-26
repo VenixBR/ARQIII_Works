@@ -306,7 +306,7 @@ generate
     end
 
 
-    // Carry  14 _CHECK
+    // Carry  14
     if(WIDTH >= 14) begin
         assign t[207] = p[13]  & p[12]  & p[11]  & p[10];   // vv - And15
         assign t[208] = p[9]   & p[8]   & p[7]   & p[6];    //
