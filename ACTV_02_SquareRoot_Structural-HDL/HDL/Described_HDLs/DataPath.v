@@ -119,6 +119,7 @@ gen_reg #(
     .dataout( root_s     )
 ); 
 
+
 // ADDERS
 
 CLA #(

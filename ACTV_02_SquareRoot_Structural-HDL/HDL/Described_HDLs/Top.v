@@ -16,6 +16,8 @@ wire muxes_s;
 wire wr_root_s;
 wire wr_square_s;
 wire root_s;
+wire root_reg_s;
+wire wr_mux_root_s;
 
 // Datapath outputs
 wire [7:0] root_1_s;
@@ -37,6 +39,18 @@ gen_reg #(
     .dataout( valor_s )
 ); 
 
+// MUX_ROOT CONTROL SIGNAL REGISTER
+gen_reg #(
+    .REG_WIDTH(1)
+) ROOT_REG (
+    .datain ( root_s        ),
+    .set    ( 1'b1          ),
+    .reset  ( rst_n         ),
+    .enable ( wr_mux_root_s ),
+    .clock  ( clk           ),
+    .dataout( root_reg_s    )
+); 
+
 
 
 // INSTANTIATION OF CONTROL PATH AND DATA PATHS
@@ -50,7 +64,8 @@ ControlPath CONTROL_PATH(
     .ready_o(ready_o),
     .wr_root_o(wr_root_s),
     .wr_square_o(wr_square_s),
-    .root_o(root_s)
+    .root_o(root_s),
+    .wr_mux_root_o(wr_mux_root_s)
 );
 
 DataPath #(
@@ -94,10 +109,10 @@ DataPath #(
 mux_2_1 #(
     .DATA_WIDTH(8)
 ) ROOT_OUTPUT_MUX (
-    .A0    ( root_1_s ),
-    .A1    ( root_2_s ),
-    .s0    ( root_s   ),
-    .result( root_o   )
+    .A0    ( root_1_s   ),
+    .A1    ( root_2_s   ),
+    .s0    ( root_reg_s ),
+    .result( root_o     )
 );
 
 
