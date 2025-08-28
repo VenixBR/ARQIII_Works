@@ -12,7 +12,7 @@ CLA:
 	if [ "$(TB)" = "0" ]; then \
 		xrun -v2001 ${RTL_DIR}/Described_HDLs/CLA.v $(FLAGS); \
 	else \
-		xrun -v2001 ${RTL_DIR}/Described_HDLs/CLA.v ${TESTS_DIR}/CLA_16bits_tb.sv $(FLAGS) +define+CLAFULL; \
+		xrun -v2001 ${RTL_DIR}/Described_HDLs/CLAv2.v ${TESTS_DIR}/CLA_16bits_tb.sv $(FLAGS) +define+CLAFULL; \
 	fi
 
 CLA2x8:
