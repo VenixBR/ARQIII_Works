@@ -142,7 +142,7 @@ wire t2[423:0];
         nand nand4_3 (c[6], t[21], t[23], t[25], t[29]);
     end
 
-    // Carry 7
+    // Carry 7 (5 layers)
     if(WIDTH >= 7) begin
 
         xor  xor2_4  (p[3], A_i[3], B_i[3]); // p functio
@@ -157,44 +157,33 @@ wire t2[423:0];
         nand nand4_4 (t[30], p[6], p[5], p[4], p[3]);
         nand nand4_5 (t[31], p[2], p[1], p[0], c[0]);
         nor  nor2_8  (t[32], t[30], t[31]);
-
-        //t[30]
         nand nand3_5 (t[33], p[2], p[1], g[0]);
         nor  nor2_9  (t[34], t[30], t[33]);
-
-        //t[30]
         nand nand2_17(t[35], p[2], g[1]);
         nor  nor2_10 (t[36], t[30], t[35]); 
-
-        //t[30]
         nor  nor2_11 (t[37], t[30], gn[2]);
-
         nand nand4_6 (t[38], p[6], p[5], p[4], g[3]);
-
         nand nand3_6(t[39], p[6], p[5], g[4]);
-
         nand nand2_18(t[40], p[6], g[5]);
-
         nand nand3_7 (t[41], t[38], t[39], t[40]);
         nor  nor3_10 (t[42], t[32], t[34], t[36]);
         nor  nor3_11 (t[43], t[37], t[41], g[6]);
         nand nand2_19(c[7], t[42], t[43]);
+/*
+and2  = 6
+xnor2 = 11
+xor2  = 7
+not   = 5
 
-        // assign t[30] = p[6]  & p[5]  & p[4]  & p[3];     // vv - And8
-        // assign t[31] = p[2]  & p[1]  & p[0]  & c[0];     // 
-        // assign t[32] = t[30] & t[31];                    //
-        //assign t[33] = p[6]  & p[5]  & p[4]  & p[3];     // vv - And7
-        //assign t[34] = t[33] & p[2]  & p[1]  & g[0];     //
-        //assign t[35] = p[6]  & p[5]  & p[4]  & p[3];     // vv - And6
-        //assign t[36] = t[35] & p[2]  & g[1];             //
-        //assign t[37] = p[6]  & p[5]  & p[4]  & p[3];     // vv - And5
-        //assign t[38] = t[37] & g[2];                     //
-        // assign t[39] = p[6]  & p[5]  & p[4]  & g[3];
-        // assign t[40] = p[6]  & p[5]  & g[4];
-        // assign t[41] = p[6]  & g[5];
-        // assign t[42] = t[38] | t[36] | t[34] | t[32];    // vv - Or8
-        // assign t[43] = g[6]  | t[41] | t[40] | t[39];    //
-        // assign c[7]  = t[42] | t[43];                    //
+nand2 = 19
+nand3 = 7
+nand4 = 6
+
+nor2  = 11
+nor3  = 11
+nor4  = 6
+*/
+
     end
 
     // Carry 8
