@@ -66,10 +66,11 @@ task test_result (
         end
     endtask
 
-/*
+
 	logic clk;
-	logic [32:0] inputs;
-	logic [16:0] outputs; 
+	logic [34:0] inputs;
+	logic [17:0] outputs; 
+	int tests =0;
 
 	always #1 clk <= ~clk;
 	always@ (posedge clk) begin
@@ -77,19 +78,21 @@ task test_result (
 			$display("TEST PASSED");
 			$finish;
 		end
-		A_i  = inputs[15:0];
-		B_i  = inputs[31:16];
-		Ci_i = inputs[32];
+		A_i  = inputs[17:1];
+		B_i  = inputs[34:18];
+		Ci_i = inputs[0];
 		outputs = A_i + B_i + Ci_i;
-		#1 test_result(outputs[15:0], outputs[16]);
-		inputs = inputs + 307;
+		#1 test_result(outputs[16:0], outputs[17]);
+		$display("tests: %0d", tests);
+		inputs = inputs + 3433;
+		tests = tests +1;
 	end
 initial begin
 clk = 0;
 	inputs = '0;
 	outputs = '0; 
 end
-*/
+/*
 initial begin
 	$display("\n+-----------------------------------------------------------+");
 	$display(  "| ADDER: %s", adder);
@@ -881,5 +884,5 @@ A_i=17'h12345; B_i=17'h0FEDC; Ci_i=0;
 
 
 end
-
+*/
 endmodule
