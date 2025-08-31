@@ -38,6 +38,10 @@ wire [16:0] square_added_s;
 wire [16:0] adder_in_up_s;
 wire [16:0] adder_in_down_s;
 wire [16:0] root_shifted_s;
+wire const_one_s;
+wire const_zero_s;
+wire carry_unused1_s;
+wire carry_unused2_s;
 
 
 // ####################################
@@ -48,6 +52,8 @@ assign valor_ext_s = {1'b0, valor_i};
 assign square_init_ext_s = {1'b0, SQUARE_INIT};
 assign root_ext_s = {9'b000000000,  root_s};
 
+assign const_one_s = 1'b1;
+assign const_zero_s = 1'b0;
 
 // ####################################
 // ###  INSTATIATION OF COMPONENTS  ###
@@ -101,7 +107,7 @@ gen_reg #(
     .REG_WIDTH(17)
 ) SQUARE_REG (
     .datain ( mux_square_s ),
-    .set    ( 1'b1         ),
+    .set    ( const_one_s  ),
     .reset  ( rst_n        ),
     .enable ( wr_square_i  ),
     .clock  ( clk          ),
@@ -111,12 +117,12 @@ gen_reg #(
 gen_reg #(
     .REG_WIDTH(8)
 ) ROOT_REG (
-    .datain ( mux_root_s ),
-    .set    ( 1'b1       ),
-    .reset  ( rst_n      ),
-    .enable ( wr_root_i  ),
-    .clock  ( clk        ),
-    .dataout( root_s     )
+    .datain ( mux_root_s  ),
+    .set    ( const_one_s ),
+    .reset  ( rst_n       ),
+    .enable ( wr_root_i   ),
+    .clock  ( clk         ),
+    .dataout( root_s      )
 ); 
 
 
@@ -129,7 +135,7 @@ CLA #(
     .B_i ( adder_in_down_s ),
     .Ci_i( muxes_i         ),
     .S_o ( square_added_s  ),
-    .Co_o(                 )
+    .Co_o( carry_unused1_s )
 );
 
 CLA #(
@@ -137,9 +143,9 @@ CLA #(
 ) ROOT_ADDER (
     .A_i ( root_s             ),
     .B_i ( ROOT_INC           ),
-    .Ci_i( 1'b0               ),
+    .Ci_i( const_zero_s       ),
     .S_o ( root_incremented_s ),
-    .Co_o(                    )
+    .Co_o( carry_unused2_s    )
 );
 
 // SHIFTER

@@ -25,18 +25,21 @@ wire [7:0] root_2_s;
 
 wire [15:0] valor_s;
 
+wire const_one_s;
+
+assign const_one_s = 1'b1;
 
 
 // INPUT REGISTER
 gen_reg #(
     .REG_WIDTH(16)
 ) INPUT_REG (
-    .datain ( valor_i ),
-    .set    ( 1'b1    ),
-    .reset  ( rst_n   ),
-    .enable ( boot_s  ),
-    .clock  ( clk     ),
-    .dataout( valor_s )
+    .datain ( valor_i     ),
+    .set    ( const_one_s ),
+    .reset  ( rst_n       ),
+    .enable ( boot_s      ),
+    .clock  ( clk         ),
+    .dataout( valor_s     )
 ); 
 
 // MUX_ROOT CONTROL SIGNAL REGISTER
@@ -44,7 +47,7 @@ gen_reg #(
     .REG_WIDTH(1)
 ) ROOT_REG (
     .datain ( root_s        ),
-    .set    ( 1'b1          ),
+    .set    ( const_one_s   ),
     .reset  ( rst_n         ),
     .enable ( wr_mux_root_s ),
     .clock  ( clk           ),
