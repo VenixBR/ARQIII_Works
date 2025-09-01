@@ -1,7 +1,7 @@
 ../HDL/Provided_HDLs/dffa.vhd
 ../HDL/Provided_HDLs/gen_reg.vhd
 ../HDL/Provided_HDLs/mux.vhd
-../HDL/Described_HDLs/CLAv2.v
+../HDL/Described_HDLs/CLA.v
 ../HDL/Described_HDLs/leftShifter.v
 ../HDL/Described_HDLs/ControlPath.v
 ../HDL/Described_HDLs/DataPath.v
