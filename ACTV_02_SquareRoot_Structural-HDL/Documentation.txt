@@ -1,0 +1,26 @@
+Directories:
+
+ACTV_02_SquareRoot_Structural-HDL
+--+ HDL                             -- HDL codes that describes the circuits
+--| --+Described_HDLs               -- HDLs described by me
+--| --+Provided_HDLs                -- HDLs provided by professor
+--|
+--+ Testbenchs                      -- HDLs destinated to circuit testbenchs
+--| --+Images                       -- Screenhots of some cases of testbenchs
+--|
+--+ Work                            -- Directory for temporary archivers of Xcelium
+--|
+--| filelist_DP.flist               -- Filelist of archivers to test the sintax of datapath
+--+ filelist_Top.flist              -- Filelist of archivers to test the Top circuit
+--+ Makefile                        -- Makefile with commands to call Xcelium
+
+
+
+In Makefile you can include the flags "GUI" and "TB". 
+"GUI=1" will open the GUI of Xcelium.
+"TB=0" do not will load to Xcelium the testbench archive.
+
+Examples:
+make CLA TB=0                   -- Will only test the sintax of code
+make Top GUI=1                  -- Will load the testbench to test the circuit and open the GUI
+make ControlPath GUI=1 TB=0     -- Will only test the sintax of code and open GUI
