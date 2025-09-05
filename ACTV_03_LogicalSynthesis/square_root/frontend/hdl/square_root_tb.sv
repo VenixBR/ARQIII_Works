@@ -1,12 +1,12 @@
-module Top_tb;
+module square_root_tb;
 
-parameter CLOCK_PERIOD =2;
+parameter CLOCK_PERIOD =2.38;
 
 logic clk, rst_n, ready;
 logic [15:0] valor;
 logic [7:0] root;
 
-Top DUV (
+square_root DUV (
     .valor_i(valor),
     .clk(clk),
     .rst_n(rst_n),
@@ -97,13 +97,13 @@ initial begin
     #((6*CLOCK_PERIOD)/5)
     rst_n=1;
 
-    inputs = $fopen("../Testbenchs/input_vector.txt", "r");
+    inputs = $fopen("../../frontend/hdl/input_vector.txt", "r");
     if(inputs == 0) begin
         $display("\nERROR IN THE INPUT TEST VECTOR LOAD!!");
         $finish;
     end
 
-    outputs = $fopen("../Testbenchs/output_vector.txt", "r");
+    outputs = $fopen("../../frontend/hdl/output_vector.txt", "r");
     if(outputs == 0) begin
         $display("\nERROR IN THE OUTPUT TEST VECTOR LOAD!!");
         $finish;
