@@ -1,0 +1,9 @@
+../hdl/dffa.vhd
+../hdl/gen_reg.vhd
+../hdl/mux.vhd
+../hdl/CLA.v
+../hdl/leftShifter.v
+../hdl/ControlPath.v
+../hdl/DataPath.v
+../hdl/square_root.v
+../hdl/Top_tb.sv

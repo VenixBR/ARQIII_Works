@@ -1,0 +1,68 @@
+xrun: 23.03-s005: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
+TOOL:	xrun	23.03-s005: Started on Sep 08, 2025 at 01:22:03 -03
+xrun
+	-v2001
+	-v93
+	-f /home/schultz/Documents/ARQIII_Works/ACTV_04_SquareROOT_SecondVersion/filelist_Top.flist
+		../HDL/Provided_HDLs/dffa.vhd
+		../HDL/Provided_HDLs/gen_reg.vhd
+		../HDL/Provided_HDLs/mux.vhd
+		../HDL/Described_HDLs/RegSquare2.v
+		../HDL/Described_HDLs/Stage1.v
+		../HDL/Described_HDLs/Stage2.v
+		../HDL/Described_HDLs/CLA.v
+		../HDL/Described_HDLs/Comparator.v
+		../HDL/Described_HDLs/DataPath.v
+		../HDL/Described_HDLs/ControlPath.v
+		../HDL/Described_HDLs/Top.v
+	/home/schultz/Documents/ARQIII_Works/ACTV_04_SquareROOT_SecondVersion/Testbenchs/Top_tb.sv
+file: ../HDL/Described_HDLs/Stage1.v
+	module worklib.Stage1:v
+		errors: 0, warnings: 0
+file: /home/schultz/Documents/ARQIII_Works/ACTV_04_SquareROOT_SecondVersion/Testbenchs/Top_tb.sv
+    $fscanf(inputs, "%d\n", valor);
+          |
+xmvlog: *W,NOSYST (/home/schultz/Documents/ARQIII_Works/ACTV_04_SquareROOT_SecondVersion/Testbenchs/Top_tb.sv,60|10): System function '$fscanf' invoked as a task. Return value will be ignored.
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+		Caching library 'worklib' ....... Done
+	Top level design units:
+		Top_tb
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		worklib.Stage1:v <0x0c4ac186>
+			streams:   1, words:   138
+	Building instance specific data structures.
+    .reset  ( const_one_s ),
+                        |
+xmelab: *W,CSINFI (../HDL/Described_HDLs/Stage2.v,25|24): implicit wire has no fanin (Top_tb.DUV.DATA_PATH.PIPELINE_STAGE2.const_one_s).
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		               Instances  Unique
+	VHDL Design hierarchy:
+		Components:           96       3
+		Default bindings:     67      66
+		Processes:           180       4
+		Signals:              90       2
+	Verilog Design hierarchy:
+		Modules:              11       9
+		Primitives:          377       6
+		Registers:            24      24
+		Scalar wires:         24       -
+		Expanded wires:       75       7
+		Vectored wires:        4       -
+		Always blocks:         7       7
+		Initial blocks:        3       3
+		Cont. assignments:    13      18
+		Pseudo assignments:    5       -
+	Writing initial simulation snapshot: worklib.Top_tb:sv
+Loading snapshot worklib.Top_tb:sv .................... Done
+xcelium> source /home/tools/cadence/installs/XCELIUM2303/tools/xcelium/files/xmsimrc
+xcelium> run
+
++----------------------------------------------
+|             TEST STARTED
++----------------------------------------------
+Simulation interrupted at 38622790 NS + 2
+xcelium> exit
+TOOL:	xrun	23.03-s005: Exiting on Sep 08, 2025 at 01:22:10 -03  (total: 00:00:07)
