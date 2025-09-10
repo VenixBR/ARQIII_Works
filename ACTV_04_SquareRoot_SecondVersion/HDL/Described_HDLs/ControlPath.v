@@ -35,7 +35,7 @@ module ControlPath (
             S2 : NextState = (N_i==1'b0) ? S1 : S3;
             S3 : NextState = S4;
             S4 : NextState = S4;
-            default: NextState = S0;
+            default : NextState = S0;
         endcase
     end
 

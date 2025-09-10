@@ -19,6 +19,10 @@ module Stage2 (
     output  wire [8:0] B_high_o
 );
 
+wire const_one_s;
+
+assign const_one_s = 1'b1;
+
 dffa ready_reg (
     .d      ( ready_i     ),
     .set    ( rst_n       ),
