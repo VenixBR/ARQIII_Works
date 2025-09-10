@@ -1,4 +1,4 @@
-`timescale 1ns/1ps
+
 
 module RegSquare2 (
     input  wire [16:0] datain,

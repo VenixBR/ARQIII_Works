@@ -1,4 +1,4 @@
-`timescale 1ns/1ps
+
 
 module Square_root (
     input  wire [15:0] valor_i,

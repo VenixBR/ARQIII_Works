@@ -1,4 +1,4 @@
-`timescale 1ns/1ps
+
 
 module Stage2 (
     input  wire clk,

@@ -2,7 +2,7 @@
 
 module Square_root_tb;
 
-parameter CLOCK_PERIOD =100;
+parameter CLOCK_PERIOD =1.92;
 
 logic clk, rst_n, ready;
 logic [15:0] valor;

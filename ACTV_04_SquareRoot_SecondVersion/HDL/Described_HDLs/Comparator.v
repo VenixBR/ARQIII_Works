@@ -1,4 +1,4 @@
-`timescale 1ns/1ps
+
 
 module Comparator (
     input wire [16:0] A_i,
