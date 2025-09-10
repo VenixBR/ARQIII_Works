@@ -1,2 +1,0 @@
-Amount of error detections:        100
-Amount of successful receive:          0

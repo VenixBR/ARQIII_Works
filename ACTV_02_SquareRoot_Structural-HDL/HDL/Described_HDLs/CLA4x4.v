@@ -1,9 +1,9 @@
 module CLA4x4 (
-    input  wire [15:0] A_i,
-    input  wire [15:0] B_i,
+    input  wire [16:0] A_i,
+    input  wire [16:0] B_i,
     input  wire Ci_i,
     output wire Co_o,
-    output wire [15:0] S_o
+    output wire [16:0] S_o
 );
 
 wire c [2:0];
@@ -40,13 +40,13 @@ CLA #(
 );
 
 CLA #(
-   .WIDTH(4)
+   .WIDTH(5)
 ) adder4 (
-    .A_i ( A_i[15:12] ),
-    .B_i ( B_i[15:12] ),
+    .A_i ( A_i[16:12] ),
+    .B_i ( B_i[16:12] ),
     .Ci_i( c[2]       ),
     .Co_o( Co_o       ),
-    .S_o ( S_o[15:12] )
+    .S_o ( S_o[16:12] )
 );
 
 

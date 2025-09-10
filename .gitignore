@@ -1,2 +1,5 @@
 ACTV_02_SquareRoot_Structural-HDL/Work/*
 ACTV_03_LogicalSynthesis/square_root/synthesis/work/*
+ACTV_03_LogicalSynthesis/square_root_pipe/synthesis/work/*
+ACTV_04_SquareRoot_SecondVersion/square_root_pipe/synthesis/work/*
+ACTV_04_SquareRoot_SecondVersion/Work/*
