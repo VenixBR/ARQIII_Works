@@ -1,3 +1,5 @@
+`timescale 1ns/1ps
+
 module DataPath (
     input  wire clk,
     input  wire rst_n,
@@ -103,7 +105,7 @@ Stage1 PIPELINE_STAGE1 (
     .square1_i     ( square_added_s     ),
     .square2_i     ( square_added_s     ),
     .root_i        ( root_incremented_s ),
-    .wr_square_i   ( wr_square_i        ),
+    .wr_square_i   ( S2_o_wr_square_s   ),
     .wr_square_s_o ( S1_o_wr_square_s   ),
     .input_o       ( S1_o_input_s       ),
     .square1_o     ( S1_o_square1_s     ),

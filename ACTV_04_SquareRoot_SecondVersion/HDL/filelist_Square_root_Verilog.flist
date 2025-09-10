@@ -1,0 +1,8 @@
+RegSquare2.v
+Stage1.v
+Stage2.v
+CLA.v
+Comparator.v
+DataPath.v
+ControlPath.v
+Square_root.v

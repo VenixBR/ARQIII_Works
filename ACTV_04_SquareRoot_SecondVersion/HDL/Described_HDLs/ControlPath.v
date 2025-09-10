@@ -1,3 +1,5 @@
+`timescale 1ns/1ps
+
 module ControlPath (
 
     input  wire clk,
@@ -24,8 +26,8 @@ module ControlPath (
 
 
     // Internal signals
-    reg  [1:0] CurrentState;
-    reg  [1:0] NextState;
+    reg  [2:0] CurrentState;
+    reg  [2:0] NextState;
 
     // Next state logic
     always@* begin

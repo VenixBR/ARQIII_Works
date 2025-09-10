@@ -1,0 +1,48 @@
+Cadence Genus(TM) Synthesis Solution.
+Copyright 2023 Cadence Design Systems, Inc. All rights reserved worldwide.
+Cadence and the Cadence logo are registered trademarks and Genus is a trademark
+of Cadence Design Systems, Inc. in the United States and other countries.
+
+[14:56:59.456177] Configured Lic search path (21.01-s002): 27001@200.132.35.25
+
+Version: 21.18-s082_1, built Tue Jul 18 09:08:41 PDT 2023
+Options: -abort_on_error -lic_startup Genus_Synthesis -lic_startup_options Genus_Physical_Opt -log genus -overwrite -files /home/schultz/Documents/ARQIII_Works/ACTV_04_SquareRoot_SecondVersion//synthesis/scripts/Square_root.tcl 
+Date:    Wed Sep 10 14:56:59 2025
+Host:    gmicro02 (x86_64 w/Linux 4.18.0-553.37.1.el8_10.x86_64) (16cores*32cpus*2physical cpus*Intel(R) Xeon(R) Silver 4314 CPU @ 2.40GHz 16384KB) (124344320KB)
+PID:     148619
+OS:      Red Hat Enterprise Linux release 8.10 (Ootpa)
+
+
+[14:56:59.449945] Periodic Lic check successful
+[14:56:59.449953] Feature usage summary:
+[14:56:59.449953] Genus_Synthesis
+Checking out license: Genus_Synthesis
+
+
+***********************************************************************************************************
+***********************************************************************************************************
+
+
+
+Loading tool scripts...
+Finished loading tool scripts (9 seconds elapsed).
+
+
+[14:57:08.206490] Periodic Lic check successful
+[14:57:08.206499] Feature usage summary:
+[14:57:08.206499] Genus_Synthesis
+[14:57:08.206504] Genus_Physical_Opt
+Checking out license: Genus_Physical_Opt
+
+#@ Processing -files option
+@genus 1> source /home/schultz/Documents/ARQIII_Works/ACTV_04_SquareRoot_SecondVersion//synthesis/scripts/Square_root.tcl
+File '/home/schultz/Documents/ARQIII_Works/ACTV_04_SquareRoot_SecondVersion//synthesis/scripts/Square_root.tcl' does not exist.
+Encountered problems processing file: /home/schultz/Documents/ARQIII_Works/ACTV_04_SquareRoot_SecondVersion//synthesis/scripts/Square_root.tcl
+
+Lic Summary:
+[14:57:08.232264] Cdslmd servers: gmicro0
+[14:57:08.232282] Feature usage summary:
+[14:57:08.232283] Genus_Synthesis
+[14:57:08.232283] Genus_Physical_Opt
+
+Abnormal exit.Abnormal exit.

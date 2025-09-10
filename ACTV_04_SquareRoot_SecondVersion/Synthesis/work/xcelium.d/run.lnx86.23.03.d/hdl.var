@@ -1,0 +1,16 @@
+define XMSIMRC	( /home/tools/cadence/installs/XCELIUM2303/tools/xcelium/files/xmsimrc, ~/.xmsimrc )
+define AMSRC	( /home/tools/cadence/installs/XCELIUM2303/tools/xcelium/files/amsrc, ~/.amsrc )
+include ./hdlrun.var
+define SNAPSHOT worklib.Square_root_tb:sv
+DEFINE RUNMODEDEFAULT 1
+DEFINE LIB_MAP ( + => worklib )
+define ELAB_SNAPSHOT
+define SNAPSHOT worklib.Square_root_tb:sv
+define ELAB_SNAPSHOT
+define SNAPSHOT worklib.Square_root_tb:sv
+define ELAB_SNAPSHOT
+define SNAPSHOT worklib.Square_root_tb:sv
+define ELAB_SNAPSHOT
+define SNAPSHOT worklib.Square_root_tb:sv
+define ELAB_SNAPSHOT
+define SNAPSHOT worklib.Square_root_tb:sv

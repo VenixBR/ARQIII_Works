@@ -1,0 +1,11 @@
+../../HDL/Provided_HDLs/dffa.vhd
+../../HDL/Provided_HDLs/gen_reg.vhd
+../../HDL/Provided_HDLs/mux.vhd
+../../HDL/Described_HDLs/RegSquare2.v
+../../HDL/Described_HDLs/Stage1.v
+../../HDL/Described_HDLs/Stage2.v
+../../HDL/Described_HDLs/CLA.v
+../../HDL/Described_HDLs/Comparator.v
+../../HDL/Described_HDLs/DataPath.v
+../../HDL/Described_HDLs/ControlPath.v
+../../HDL/Described_HDLs/Square_root.v
