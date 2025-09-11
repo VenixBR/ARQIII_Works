@@ -56,7 +56,7 @@ module ControlPath (
         case( CurrentState )
             S0 : begin
                     wr_input_o    = 1'b1;
-                    wr_square_o   = 1'b0;
+                    wr_square_o   = 1'bx;
                     en_pipe_o     = 1'b0;
                     ready_o       = 1'bx;
                     mux_root_o    = 1'bx;
