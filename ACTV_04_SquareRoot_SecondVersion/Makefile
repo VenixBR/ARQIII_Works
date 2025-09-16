@@ -37,7 +37,7 @@ Comparator:
 	if [ "$(TB)" = "0" ]; then \
 		xrun -v2001 ${RTL_DIR}/Described_HDLs/Comparator.v $(FLAGS); \
 	else \
-		xrun -v2001 ${RTL_DIR}/Described_HDLs/Comparator.v ${TESTS_DIR}/Comparator_tb.sv $(FLAGS) +define+CLA4x4; \
+		xrun -v2001 ${RTL_DIR}/Described_HDLs/Comparator_pipe.v ${TESTS_DIR}/Comparator_tb.sv $(FLAGS) +define+CLA4x4; \
 	fi
 
 ControlPath:
@@ -190,7 +190,7 @@ sim-pos-syn:
 	    "$(TECH_DIR)/gsclib045_all_v4.4/gsclib045/verilog/slow_vdd1v0_basicCells.v" \
 	    "$(PROJECT_DIR)/Synthesis/deliverables/$(FREQ_MHZ)_MHz/$(OP_CORNER)/$(DESIGNS).v" \
 	    "$(PROJECT_DIR)/Testbenchs/$(DESIGNS)_tb.sv" \
-	    -top ${DESIGNS}_tb -timescale 1ps/1fs -access +rwc -sdf_cmd_file ${PROJECT_DIR}/Synthesis/scripts/sdf_cmd_file.cmd; \
+	    -top ${DESIGNS}_tb -timescale 1ns/1ps -access +rwc -sdf_cmd_file ${PROJECT_DIR}/Synthesis/scripts/sdf_cmd_file.cmd; \
 	fi
 	@if [ "$(OP_CORNER)" = "BEST" ]; then \
 	  cd "$(PROJECT_DIR)/Synthesis/work" && \
@@ -199,7 +199,7 @@ sim-pos-syn:
 	    "$(TECH_DIR)/gsclib045_all_v4.4/gsclib045/verilog/fast_vdd1v2_basicCells.v" \
 	    "$(PROJECT_DIR)/Synthesis/deliverables/$(FREQ_MHZ)_MHz/$(OP_CORNER)/$(DESIGNS).v" \
 	    "$(PROJECT_DIR)/Testbenchs/$(DESIGNS)_tb.sv" \
-	    -top ${DESIGNS}_tb -timescale 1ps/1fs -access +rwc -sdf_cmd_file ${PROJECT_DIR}/Synthesis/scripts/sdf_cmd_file.cmd; \
+	    -top ${DESIGNS}_tb -timescale 1ns/1ps -access +rwc -sdf_cmd_file ${PROJECT_DIR}/Synthesis/scripts/sdf_cmd_file.cmd; \
 	fi
 
 ## Simulation with SDF notation (with GUI)
@@ -211,7 +211,7 @@ sim-pos-syn-gui:
 	    "$(TECH_DIR)/gsclib045_all_v4.4/gsclib045/verilog/slow_vdd1v0_basicCells.v" \
 	    "$(PROJECT_DIR)/Synthesis/deliverables/$(FREQ_MHZ)_MHz/$(OP_CORNER)/$(DESIGNS).v" \
 	    "$(PROJECT_DIR)/Testbenchs/$(DESIGNS)_tb.sv" \
-	    -top ${DESIGNS}_tb  -timescale 1ns/1ps -access +rwc -gui -sdf_cmd_file ${PROJECT_DIR}/Synthesis/scipts/sdf_cmd_file.cmd; \
+	    -top ${DESIGNS}_tb  -timescale 1ns/1ps -access +rwc -gui -sdf_cmd_file ${PROJECT_DIR}/Synthesis/scripts/sdf_cmd_file.cmd; \
 	fi
 	@if [ "$(OP_CORNER)" = "BEST" ]; then \
 	  cd "$(PROJECT_DIR)/Synthesis/work" && \

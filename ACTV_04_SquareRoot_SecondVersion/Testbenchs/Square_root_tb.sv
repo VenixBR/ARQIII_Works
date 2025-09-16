@@ -1,8 +1,8 @@
-`timescale 1ns/1ps
+
 
 module Square_root_tb;
 
-parameter CLOCK_PERIOD =1.92;
+parameter CLOCK_PERIOD =10;
 
 logic clk, rst_n, ready;
 logic [15:0] valor;
@@ -110,7 +110,7 @@ initial begin
 
     clk = 0; rst_n = 1; valor=16'd65535; temp=8'd255;
     #(CLOCK_PERIOD/5) rst_n=0;
-    #(CLOCK_PERIOD)
+    #(2*CLOCK_PERIOD)
     rst_n=1;
 
     inputs = $fopen("../../Testbenchs/input_vector.txt", "r");
