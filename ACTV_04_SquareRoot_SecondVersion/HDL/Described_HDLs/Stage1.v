@@ -5,7 +5,7 @@ module Stage1 (
     input  wire rst_n, 
     input  wire en_pipe_i,
     input  wire wr_input_i,
-    input  wire wr_square_i,
+    input  wire wr_root_i,
     input  wire [15:0] input_i,
     input  wire [16:0] square_i,
     input  wire [7:0]  root_i,
@@ -37,7 +37,7 @@ gen_reg #(
     .datain  ( square_i    ),
     .set     ( const_one_s ),
     .reset   ( rst_n       ),
-    .enable  ( wr_square_i ),
+    .enable  ( en_pipe_i   ),
     .clock   ( clk         ),
     .dataout ( square_o    )
 );
@@ -48,7 +48,7 @@ gen_reg #(
     .datain  ( root_i      ),
     .set     ( const_one_s ),
     .reset   ( rst_n       ),
-    .enable  ( en_pipe_i   ),
+    .enable  ( wr_root_i   ),
     .clock   ( clk         ),
     .dataout ( root_o      )
 );
