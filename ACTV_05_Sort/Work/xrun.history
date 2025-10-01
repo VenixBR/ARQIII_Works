@@ -1,0 +1,17 @@
+s1(30Sep2025:17:29:54):  xrun -v2001 /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/Comparator.v -access +rwc 
+s2(30Sep2025:17:33:53):  xrun -v2001 /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/Comparator.v -access +rwc 
+s3(30Sep2025:17:34:43):  xrun -v2001 /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/Comparator.v -access +rwc 
+s4(30Sep2025:17:35:45):  xrun -v2001 /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/Comparator.v -access +rwc 
+s5(30Sep2025:17:37:24):  xrun -v2001 /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/Comparator.v -access +rwc 
+s6(30Sep2025:17:42:07):  xrun -v2001 /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/Comparator.v /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/DataPath.v -access +rwc 
+s7(30Sep2025:17:42:19):  xrun -v2001 /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/Comparator.v /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/DataPath.v -access +rwc 
+s8(30Sep2025:17:44:00):  xrun -v2001 /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/Comparator.v /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/DataPath.v -access +rwc 
+s9(30Sep2025:17:44:20):  xrun -v2001 /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/Comparator.v /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/DataPath.v -access +rwc 
+s10(30Sep2025:17:44:40):  xrun -v2001 /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/Comparator.v /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/DataPath.v -access +rwc 
+s11(30Sep2025:20:09:50):  xrun -v2001 /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/Described_HDLs/ControlPath.v /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/Testbenchs/ControlPath_tb.sv -access +rwc 
+s12(30Sep2025:20:09:59):  xrun -v2001 /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDLControlPath.v -access +rwc 
+s13(30Sep2025:20:10:18):  xrun -v2001 /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/ControlPath.v -access +rwc 
+s14(30Sep2025:20:11:12):  xrun -v2001 /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/ControlPath.v -access +rwc 
+s15(30Sep2025:20:16:45):  xrun -v2001 /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/Comparator.v /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/DataPath.v -access +rwc 
+s16(30Sep2025:20:17:24):  xrun -v2001 /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/Comparator.v /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/DataPath.v -access +rwc 
+s17(30Sep2025:20:28:02):  xrun -v2001 /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/ControlPath.v -access +rwc 

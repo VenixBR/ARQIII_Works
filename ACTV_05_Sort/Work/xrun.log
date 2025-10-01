@@ -1,0 +1,32 @@
+xrun: 23.03-s005: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
+TOOL:	xrun	23.03-s005: Started on Sep 30, 2025 at 20:28:02 -03
+xrun
+	-v2001
+	/home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/ControlPath.v
+	-access +rwc
+file: /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/ControlPath.v
+	module worklib.ControlPath:v
+		errors: 0, warnings: 0
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+	Top level design units:
+		ControlPath
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		worklib.ControlPath:v <0x4957135d>
+			streams:   4, words:  4866
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		         Instances  Unique
+		Modules:         1       1
+		Registers:      10      10
+		Scalar wires:    6       -
+		Always blocks:   3       3
+	Writing initial simulation snapshot: worklib.ControlPath:v
+Loading snapshot worklib.ControlPath:v .................... Done
+xcelium> source /home/tools/cadence/installs/XCELIUM2303/tools/xcelium/files/xmsimrc
+xcelium> run
+xmsim: *W,RNQUIE: Simulation is complete.
+xcelium> exit
+TOOL:	xrun	23.03-s005: Exiting on Sep 30, 2025 at 20:28:02 -03  (total: 00:00:00)

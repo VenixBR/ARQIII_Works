@@ -1,0 +1,11 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
+-v2001
+-v93
+-f
+/home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/filelist.flist
+/home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv
+-access
++rwc

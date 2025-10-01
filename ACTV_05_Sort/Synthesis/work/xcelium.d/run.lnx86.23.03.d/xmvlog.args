@@ -1,0 +1,23 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
+-XLMODE
+./xcelium.d/run.lnx86.23.03.d
+-RUNMODE
+-v2001
+../../HDL/Comparator.v
+../../HDL/ControlPath.v
+../../HDL/DataPath.v
+../../HDL/BubbleSort.v
+/home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv
+-CDSLIB
+./xcelium.d/run.lnx86.23.03.d/cdsrun.lib
+-HDLVAR
+./xcelium.d/run.lnx86.23.03.d/hdlrun.var
+-no_analogsolver
+-MESSAGES
+-UPDATE
+-XLLIBSTORE
+./xcelium.d/run.lnx86.23.03.d/xllibs
+-ALLOWUNBOUND

@@ -8,34 +8,10 @@ ifeq ($(GUI),1)
 	FLAGS += -gui
 endif
 
-CLA:
-	cd ${ROOT}/Work && \
-	if [ "$(TB)" = "0" ]; then \
-		xrun -v2001 ${RTL_DIR}/Described_HDLs/CLA.v $(FLAGS); \
-	else \
-		xrun -v2001 ${RTL_DIR}/Described_HDLs/CLA.v ${TESTS_DIR}/CLA_16bits_tb.sv $(FLAGS) +define+CLAFULL; \
-	fi
-
-CLA2x8:
-	cd ${ROOT}/Work && \
-	if [ "$(TB)" = "0" ]; then \
-		xrun -v2001 ${RTL_DIR}/Described_HDLs/CLA2x8.v $(FLAGS); \
-	else \
-		xrun -v2001 ${RTL_DIR}/Described_HDLs/CLA.v ${RTL_DIR}/Described_HDLs/CLA2x8.v ${TESTS_DIR}/CLA_16bits_tb.sv $(FLAGS) +define+CLA2x8; \
-	fi
-
-CLA4x4:
-	cd ${ROOT}/Work && \
-	if [ "$(TB)" = "0" ]; then \
-		xrun -v2001 ${RTL_DIR}/Described_HDLs/CLA4x4.v $(FLAGS); \
-	else \
-		xrun -v2001 ${RTL_DIR}/Described_HDLs/CLA.v ${RTL_DIR}/Described_HDLs/CLA4x4.v ${TESTS_DIR}/CLA_16bits_tb.sv $(FLAGS) +define+CLA4x4; \
-	fi
-
 Comparator:
 	cd ${ROOT}/Work && \
 	if [ "$(TB)" = "0" ]; then \
-		xrun -v2001 ${RTL_DIR}/Described_HDLs/Comparator.v $(FLAGS); \
+		xrun -v2001 ${RTL_DIR}/Comparator.v $(FLAGS); \
 	else \
 		xrun -v2001 ${RTL_DIR}/Described_HDLs/Comparator_pipe.v ${TESTS_DIR}/Comparator_tb.sv $(FLAGS) +define+CLA4x4; \
 	fi
@@ -43,21 +19,21 @@ Comparator:
 ControlPath:
 	cd ${ROOT}/Work && \
 	if [ "$(TB)" = "0" ]; then \
-		xrun -v2001  ${RTL_DIR}/Described_HDLs/ControlPath.v $(FLAGS); \
+		xrun -v2001  ${RTL_DIR}/ControlPath.v $(FLAGS); \
 	else \
 		xrun -v2001 ${RTL_DIR}/Described_HDLs/ControlPath.v ${TESTS_DIR}/ControlPath_tb.sv $(FLAGS); \
 	fi
 
 DataPath:
 	cd ${ROOT}/Work && \
-	xrun -v2001 -v93 -f ${ROOT}/HDL/filelist_DP.flist $(FLAGS); \
+	xrun -v2001 ${RTL_DIR}/Comparator.v ${RTL_DIR}/DataPath.v $(FLAGS); \
 
 Top:
 	cd ${ROOT}/Synthesis/work && \
 	if [ "$(TB)" = "0" ]; then \
-		xrun -v2001 -v93 -f ${ROOT}/HDL/filelist_Square_root.flist $(FLAGS); \
+		xrun -v2001 -v93 -f ${RTL_DIR}/filelist.flist $(FLAGS); \
 	else \
-		xrun -v2001 -v93 -f ${ROOT}/HDL/filelist_Square_root.flist ${TESTS_DIR}/Square_root_tb.sv $(FLAGS); \
+		xrun -v2001 -v93 -f ${RTL_DIR}/filelist.flist ${RTL_DIR}/BubbleSort_tb.sv $(FLAGS); \
 	fi
 
 
@@ -75,7 +51,7 @@ Top:
 ###################################################
 
 # Design top name (Top module name and filename must be the same)
-DESIGNS := Square_root
+DESIGNS := BubbleSort
 export DESIGNS
 
 # Username
@@ -97,7 +73,7 @@ endif
 export HDL_LANG
 
 # Project directory (the top folder name should be the design name)
-PROJECT_DIR := /home/$(USER)/Documents/ARQIII_Works/ACTV_04_SquareRoot_SecondVersion
+PROJECT_DIR := /home/$(USER)/Documents/ARQIII_Works/ACTV_05_Sort
 export PROJECT_DIR
 
 ## Logic synthesis directory
@@ -189,7 +165,7 @@ sim-pos-syn:
 	  xrun -iocondsort $(EXTRA_ARGS) -mess -64bit -noneg_tchk  \
 	    "$(TECH_DIR)/gsclib045_all_v4.4/gsclib045/verilog/slow_vdd1v0_basicCells.v" \
 	    "$(PROJECT_DIR)/Synthesis/deliverables/$(FREQ_MHZ)_MHz/$(OP_CORNER)/$(DESIGNS).v" \
-	    "$(PROJECT_DIR)/Testbenchs/$(DESIGNS)_tb.sv" \
+	    "$(PROJECT_DIR)/HDL/$(DESIGNS)_tb.sv" \
 	    -top ${DESIGNS}_tb -timescale 1ns/1ps -access +rwc -sdf_cmd_file ${PROJECT_DIR}/Synthesis/scripts/sdf_cmd_file.cmd; \
 	fi
 	@if [ "$(OP_CORNER)" = "BEST" ]; then \
@@ -210,7 +186,7 @@ sim-pos-syn-gui:
 	  xrun -iocondsort $(EXTRA_ARGS) -mess -64bit -noneg_tchk \
 	    "$(TECH_DIR)/gsclib045_all_v4.4/gsclib045/verilog/slow_vdd1v0_basicCells.v" \
 	    "$(PROJECT_DIR)/Synthesis/deliverables/$(FREQ_MHZ)_MHz/$(OP_CORNER)/$(DESIGNS).v" \
-	    "$(PROJECT_DIR)/Testbenchs/$(DESIGNS)_tb.sv" \
+	    "$(PROJECT_DIR)/HDL/$(DESIGNS)_tb.sv" \
 	    -top ${DESIGNS}_tb  -timescale 1ns/1ps -access +rwc -gui -sdf_cmd_file ${PROJECT_DIR}/Synthesis/scripts/sdf_cmd_file.cmd; \
 	fi
 	@if [ "$(OP_CORNER)" = "BEST" ]; then \

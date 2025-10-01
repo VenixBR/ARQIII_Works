@@ -1,0 +1,4 @@
+../../HDL/Comparator.v
+../../HDL/ControlPath.v
+../../HDL/DataPath.v
+../../HDL/BubbleSort.v
