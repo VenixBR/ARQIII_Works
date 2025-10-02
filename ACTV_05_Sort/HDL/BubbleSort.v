@@ -6,7 +6,6 @@ module BubbleSort #(
     input  signed [WIDTH-1:0] data_serial_i,
 
     output signed [WIDTH-1:0] data_serial_o,
-    output wire ready_o,
     output wire data_valid_o
 );
 
@@ -17,7 +16,6 @@ module BubbleSort #(
     wire rst_counter_s;
     wire en_sr_s;
     wire data_valid_s;
-    wire ready_s;
     wire eh_maior_s;
     wire end_comp_s;
     wire end_sft_s;
@@ -36,14 +34,12 @@ module BubbleSort #(
         .rst_counter_i ( rst_counter_s ),
         .en_sr_i       ( en_sr_s       ),
         .data_valid_i  ( data_valid_s  ),
-        .ready_i       ( ready_s       ),
         .data_serial_o ( data_serial_o ),
         .eh_maior_o    ( eh_maior_s    ),
         .end_comp_o    ( end_comp_s    ),
         .end_sft_o     ( end_sft_s     ),
         .end_count_o   ( end_count_s   ),
-        .data_valid_o  ( data_valid_o  ),
-        .ready_o       ( ready_o       )
+        .data_valid_o  ( data_valid_o  )
     );
 
     ControlPath CONTROL_PATH(
@@ -59,8 +55,7 @@ module BubbleSort #(
         .mux_in_o     ( mux_in_s      ),
         .rst_cntr_o   ( rst_counter_s ),
         .en_sr_o      ( en_sr_s       ),
-        .data_valid_o ( data_valid_s  ),
-        .ready_o      ( ready_s       )
+        .data_valid_o ( data_valid_s  )
     );
 
 endmodule

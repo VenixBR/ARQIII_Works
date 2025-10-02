@@ -13,17 +13,17 @@ module ControlPath (
     output reg mux_in_o,
     output reg rst_cntr_o,
     output reg en_sr_o,
-    output reg data_valid_o,
-    output reg ready_o
+    output reg data_valid_o
 );
 
 localparam S0 = 3'b000;
 localparam S1 = 3'b001;
-localparam S2 = 3'b011;
-localparam S3 = 3'b111;
-localparam S4 = 3'b010;
-localparam S5 = 3'b110;
-localparam S6 = 3'b100;
+localparam S2 = 3'b011; // transita para S3
+localparam S3 = 3'b010; // difere de 1 bit de S2
+localparam S4 = 3'b110; // difere de 1 bit de S3
+localparam S5 = 3'b111;
+localparam S6 = 3'b101;
+
 
 reg [2:0] CurrentState;
 reg [2:0] NextState;
@@ -69,7 +69,6 @@ always@* begin
                 rst_cntr_o   = 1'b0;
                 en_sr_o      = 1'b1;
                 data_valid_o = 1'b0;
-                ready_o      = 1'b0;
             end
         S1 : begin
                 wr_bigger_o  = (eh_maior_i==1'b1) ? 1'b1 : 1'b0;
@@ -79,7 +78,6 @@ always@* begin
                 rst_cntr_o   = 1'b1;
                 en_sr_o      = 1'b1;
                 data_valid_o = 1'b0;
-                ready_o      = 1'b0;
             end
         S2 : begin
                 wr_bigger_o  = (eh_maior_i==1'b1 || end_comp_i==1'b1) ? 1'b1 : 1'b0;
@@ -89,7 +87,6 @@ always@* begin
                 rst_cntr_o   = 1'b0;
                 en_sr_o      = 1'b1;
                 data_valid_o = 1'b0;
-                ready_o      = 1'b0;
             end
         S3 : begin
                 wr_bigger_o  = 1'b1;
@@ -99,7 +96,6 @@ always@* begin
                 rst_cntr_o   = 1'b0;
                 en_sr_o      = 1'b1;
                 data_valid_o = 1'b0;
-                ready_o      = 1'b0;
             end
         S4 : begin
                 wr_bigger_o  = 1'b0;
@@ -109,7 +105,6 @@ always@* begin
                 rst_cntr_o   = 1'b1;
                 en_sr_o      = 1'b0;
                 data_valid_o = 1'b1;
-                ready_o      = 1'b0;
             end
         S5 : begin
                 wr_bigger_o  = 1'b1;
@@ -119,7 +114,6 @@ always@* begin
                 rst_cntr_o   = 1'b0;
                 en_sr_o      = 1'b1;
                 data_valid_o = 1'b1;
-                ready_o      = (end_count_i==1'b1) ? 1'b1 : 1'b0;
             end
         S6 : begin
                 wr_bigger_o  = 1'b0;
@@ -129,7 +123,6 @@ always@* begin
                 rst_cntr_o   = 1'b0;
                 en_sr_o      = 1'b0;
                 data_valid_o = 1'bx;
-                ready_o      = 1'b0;
             end
         default : begin
                 wr_bigger_o  = 1'bx;
@@ -139,7 +132,6 @@ always@* begin
                 rst_cntr_o   = 1'bx;
                 en_sr_o      = 1'bx;
                 data_valid_o = 1'bx;
-                ready_o      = 1'bx;
             end
         
     endcase 

@@ -2,7 +2,7 @@
 
 module BubbleSort_tb;
 
-parameter time CLOCK_PERIOD = 2130ps;
+parameter CLOCK_PERIOD = 10;
 
 logic clk, rst, ready, data_valid;
 logic signed [31:0] data_serial_i, data_serial_o;
@@ -11,7 +11,6 @@ BubbleSort DUV (
     .clk(clk),
     .rst(rst),
     .data_serial_i(data_serial_i),
-    .ready_o(ready),
     .data_serial_o(data_serial_o),
     .data_valid_o(data_valid)
 );

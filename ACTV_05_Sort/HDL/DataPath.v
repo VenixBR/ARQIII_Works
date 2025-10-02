@@ -11,15 +11,13 @@ module DataPath #(
     input  wire rst_counter_i,
     input  wire en_sr_i,
     input  wire data_valid_i,
-    input  wire ready_i,
 
     output signed [WIDTH-1:0] data_serial_o,
     output wire eh_maior_o,
     output wire end_comp_o,
     output wire end_sft_o,
     output wire end_count_o,
-    output reg data_valid_o,
-    output reg ready_o
+    output reg data_valid_o
 );
 
     wire signed [WIDTH-1:0] mux_input_out_s;
@@ -143,7 +141,7 @@ module DataPath #(
     assign rst_counter_s = rst || rst_counter_i;
 
     // COUNTER
-    always @( posedge clk ) begin
+    always @( posedge clk, posedge rst_counter_s ) begin
         if( rst_counter_s == 1'b1 )
             Counter_s <= { {WIDTH{1'b0}} };
         else if( wr_counter_i == 1'b1 )
@@ -151,15 +149,13 @@ module DataPath #(
     end
 
 
-    // FLIP FLOP DATA VALID AND READY
+    // FLIP FLOP DATA VALID
     always@(posedge clk, posedge rst)begin
         if(rst == 1'b1) begin
             data_valid_o <= 1'b0;
-            ready_o <= 1'b0;
         end
         else begin
             data_valid_o <= data_valid_i;
-            ready_o <= ready_i;
         end
     end
 
