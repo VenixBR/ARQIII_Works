@@ -16,3 +16,13 @@ s15(02Oct2025:12:57:00):  xrun -v2001 -v93 -f /home/schultz/Documents/ARQIII_Wor
 s16(02Oct2025:12:59:35):  xrun -v2001 -v93 -f /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/filelist.flist /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv -access +rwc 
 s17(02Oct2025:13:01:39):  xrun -v2001 -v93 -f /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/filelist.flist /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv -access +rwc 
 s18(02Oct2025:13:01:52):  xrun -v2001 -v93 -f /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/filelist.flist /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv -access +rwc 
+s19(15Oct2025:17:56:32):  xrun -v2001 -v93 -f /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/filelist.flist /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv -access +rwc 
+s20(15Oct2025:17:56:58):  xrun -v2001 -v93 -f /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/filelist.flist /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv -access +rwc 
+s21(15Oct2025:17:57:22):  xrun -v2001 -v93 -f /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/filelist.flist /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv -access +rwc 
+s22(15Oct2025:17:57:54):  xrun -v2001 -v93 -f /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/filelist.flist /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv -access +rwc 
+s23(15Oct2025:17:58:23):  xrun -v2001 -v93 -f /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/filelist.flist /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv -access +rwc 
+s24(15Oct2025:17:59:22):  xrun -v2001 -v93 -f /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/filelist.flist /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv -access +rwc 
+s25(15Oct2025:18:00:07):  xrun -v2001 -v93 -f /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/filelist.flist /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv -access +rwc 
+s26(15Oct2025:18:00:58):  xrun -v2001 -v93 -f /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/filelist.flist /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv -access +rwc 
+s27(15Oct2025:18:02:09):  xrun -v2001 -v93 -f /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/filelist.flist /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv -access +rwc 
+s28(15Oct2025:18:02:47):  xrun -v2001 -v93 -f /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/filelist.flist /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv -access +rwc 

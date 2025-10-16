@@ -4,7 +4,7 @@ module BubbleSort_tb;
 
 parameter CLOCK_PERIOD = 10;
 
-logic clk, rst, ready, data_valid;
+logic clk, rst, ready;
 logic signed [31:0] data_serial_i, data_serial_o;
 
 BubbleSort DUV (
@@ -12,7 +12,7 @@ BubbleSort DUV (
     .rst(rst),
     .data_serial_i(data_serial_i),
     .data_serial_o(data_serial_o),
-    .data_valid_o(data_valid)
+    .ready_o(ready)
 );
 
 always #(CLOCK_PERIOD/2) clk <= ~clk;
@@ -30,7 +30,7 @@ initial begin
 
 
     entradas[0] = 32'h0000023A;   //  570
-    entradas[1] = 32'hFFFFFD12;   // -750
+    entradas[1] = 32'hFFFFFEA5;   // -347
     entradas[2] = 32'h00000000;   //    0
     entradas[3] = 32'h0000017F;   //  383
     entradas[4] = 32'hFFFFFEA5;   // -347
@@ -39,6 +39,17 @@ initial begin
     entradas[7] = 32'hFFFFFEE7;   // -281
     entradas[8] = 32'h0000031D;   //  797
     entradas[9] = 32'h00000159;   //  345
+
+    // entradas[0] = 32'h0000023A;   //  570
+    // entradas[1] = 32'h0000023A;   //  570
+    // entradas[2] = 32'h0000023A;   //  570
+    // entradas[3] = 32'h0000023A;   //  570
+    // entradas[4] = 32'h0000023A;   //  570
+    // entradas[5] = 32'h0000023A;   //  570
+    // entradas[6] = 32'h0000023A;   //  570
+    // entradas[7] = 32'h0000023A;   //  570
+    // entradas[8] = 32'h0000023A;   //  570
+    // entradas[9] = 32'h0000023A;   //  570
 
 
 	$display("\n+----------------------+");
@@ -109,7 +120,7 @@ initial begin
 
 
 
-    #(92*CLOCK_PERIOD)
+    #(85*CLOCK_PERIOD)
 
     saidas[0] = data_serial_o;
 

@@ -2,28 +2,24 @@ module ControlPath (
     input wire clk,
     input wire rst,
 
-    input wire eh_maior_i,
-    input wire end_comp_i,
-    input wire end_sft_i,
-    input wire end_count_i,
+    input wire is_bigger_i,
+    input wire end_i,
+    input wire is_nine_i,
 
     output reg wr_bigger_o,
-    output reg wr_last_o,
-    output reg wr_counter_o,
-    output reg mux_in_o,
-    output reg rst_cntr_o,
-    output reg en_sr_o,
-    output reg data_valid_o
+    output reg mux_control_o,
+    output reg boot_o,
+    output reg mux_A_o,
+    output reg clk_en_o,
+    output reg ready_o
 );
 
 localparam S0 = 3'b000;
 localparam S1 = 3'b001;
-localparam S2 = 3'b011; // transita para S3
-localparam S3 = 3'b010; // difere de 1 bit de S2
-localparam S4 = 3'b110; // difere de 1 bit de S3
+localparam S2 = 3'b011; 
+localparam S3 = 3'b010; 
+localparam S4 = 3'b110; 
 localparam S5 = 3'b111;
-localparam S6 = 3'b101;
-
 
 reg [2:0] CurrentState;
 reg [2:0] NextState;
@@ -31,21 +27,19 @@ reg [2:0] NextState;
 // NEXT STATE LOGIC
 always@* begin
     case(CurrentState)
-        S0 : NextState = (end_count_i==1'b1) ? S1 : S0;
-        S1 : NextState = S2;
-        S2 : NextState = (end_comp_i==1'b1 && end_sft_i==1'b0)  ? S3 : S2;
-
+        S0 : NextState = S1;
+        S1 : NextState = ( is_nine_i==1'b1 ) ? S2 : S1;
+        S2 : NextState = ( is_nine_i==1'b1 ) ? S3 : S2;
         S3 : begin
-                if(end_sft_i==1'b1 && end_count_i==1'b1)
+                if( end_i==1'b1 )
                     NextState = S4;
-                else if(end_sft_i == 1'b1)
+                else if( is_nine_i == 1'b0 )
                     NextState = S2;
                 else
                     NextState = S3;
             end
-        S4 : NextState = S5;
-        S5 : NextState = (end_count_i == 1'b1) ? S6 : S5;
-        S6 : NextState = S6;
+        S4 : NextState = ( is_nine_i==1'b1 ) ? S4 : S5;
+        S5 : NextState = S5;
         default : NextState = 3'bx;
     endcase
 end
@@ -62,76 +56,60 @@ end
 always@* begin
     case(CurrentState)
         S0 : begin
-                wr_bigger_o  = 1'b1;
-                wr_last_o    = 1'b0;
-                wr_counter_o = 1'b1;
-                mux_in_o     = 1'b0;
-                rst_cntr_o   = 1'b0;
-                en_sr_o      = 1'b1;
-                data_valid_o = 1'b0;
+                wr_bigger_o   = 1'b1;
+                mux_control_o = 1'b0;
+                boot_o        = 1'b1;
+                mux_A_o       = 1'b1;
+                clk_en_o      = 1'b1;
+                ready_o       = 1'b0;
             end
         S1 : begin
-                wr_bigger_o  = (eh_maior_i==1'b1) ? 1'b1 : 1'b0;
-                wr_last_o    = 1'b1;
-                wr_counter_o = 1'b0;
-                mux_in_o     = 1'b1;
-                rst_cntr_o   = 1'b1;
-                en_sr_o      = 1'b1;
-                data_valid_o = 1'b0;
+                wr_bigger_o   = 1'b1;
+                mux_control_o = 1'b1;
+                boot_o        = 1'b1;
+                mux_A_o       = 1'bx;
+                clk_en_o      = 1'b1;
+                ready_o       = 1'b0;
             end
         S2 : begin
-                wr_bigger_o  = (eh_maior_i==1'b1 || end_comp_i==1'b1) ? 1'b1 : 1'b0;
-                wr_last_o    = (end_comp_i==1'b1) ? 1'b1 : 1'b0;
-                wr_counter_o = (end_comp_i==1'b1) ? 1'b1 : 1'b0;
-                mux_in_o     = 1'b1;
-                rst_cntr_o   = 1'b0;
-                en_sr_o      = 1'b1;
-                data_valid_o = 1'b0;
+                wr_bigger_o   = ( is_nine_i==1'b0 && is_bigger_i==1'b0) ? 1'b0 : 1'b1;
+                mux_control_o = ( is_nine_i==1'b0 ) ? 1'b1 : 1'b0;
+                boot_o        = 1'b0;
+                mux_A_o       = 1'b1;
+                clk_en_o      = 1'b1;
+                ready_o       = 1'b0;
             end
         S3 : begin
-                wr_bigger_o  = 1'b1;
-                wr_last_o    = 1'b0;
-                wr_counter_o = 1'b0;
-                mux_in_o     = 1'b1;
-                rst_cntr_o   = 1'b0;
-                en_sr_o      = 1'b1;
-                data_valid_o = 1'b0;
+                wr_bigger_o   = ( is_nine_i==1'b0 && is_bigger_i==1'b0 && end_i==1'b0) ? 1'b0 : 1'b1;
+                mux_control_o = 1'b1;
+                boot_o        = 1'b0;
+                mux_A_o       = 1'bx;
+                clk_en_o      = 1'b1;
+                ready_o       = 1'b0;
             end
         S4 : begin
-                wr_bigger_o  = 1'b0;
-                wr_last_o    = 1'bx;
-                wr_counter_o = 1'b0;
-                mux_in_o     = 1'b1;
-                rst_cntr_o   = 1'b1;
-                en_sr_o      = 1'b0;
-                data_valid_o = 1'b1;
+                wr_bigger_o   = 1'b1;
+                mux_control_o = 1'b0;
+                boot_o        = 1'b0;
+                mux_A_o       = 1'b0;
+                clk_en_o      = 1'b1;
+                ready_o       = 1'b1;
             end
         S5 : begin
-                wr_bigger_o  = 1'b1;
-                wr_last_o    = 1'bx;
-                wr_counter_o = 1'b1;
-                mux_in_o     = 1'bx;
-                rst_cntr_o   = 1'b0;
-                en_sr_o      = 1'b1;
-                data_valid_o = 1'b1;
-            end
-        S6 : begin
-                wr_bigger_o  = 1'b0;
-                wr_last_o    = 1'b0;
-                wr_counter_o = 1'b0;
-                mux_in_o     = 1'bx;
-                rst_cntr_o   = 1'b0;
-                en_sr_o      = 1'b0;
-                data_valid_o = 1'bx;
+                wr_bigger_o   = 1'bx;
+                mux_control_o = 1'bx;
+                boot_o        = 1'bx;
+                mux_A_o       = 1'bx;
+                clk_en_o      = 1'b0;
+                ready_o       = 1'bx;
             end
         default : begin
-                wr_bigger_o  = 1'bx;
-                wr_last_o    = 1'bx;
-                wr_counter_o = 1'bx;
-                mux_in_o     = 1'bx;
-                rst_cntr_o   = 1'bx;
-                en_sr_o      = 1'bx;
-                data_valid_o = 1'bx;
+                wr_bigger_o   = 1'bx;
+                mux_control_o = 1'bx;
+                boot_o        = 1'bx;
+                mux_A_o       = 1'bx;
+                clk_en_o      = 1'bx;
+                ready_o       = 1'bx;
             end
         
     endcase 

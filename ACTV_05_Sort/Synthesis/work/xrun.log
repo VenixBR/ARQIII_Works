@@ -1,5 +1,5 @@
 xrun: 23.03-s005: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
-TOOL:	xrun	23.03-s005: Started on Oct 02, 2025 at 13:01:52 -03
+TOOL:	xrun	23.03-s005: Started on Oct 15, 2025 at 18:02:47 -03
 xrun
 	-v2001
 	-v93
@@ -10,9 +10,9 @@ xrun
 		../../HDL/BubbleSort.v
 	/home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv
 	-access +rwc
-Recompiling... reason: file '/home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort.v' is newer than expected.
-	expected: Thu Oct  2 12:53:53 2025
-	actual:   Thu Oct  2 13:01:36 2025
+Recompiling... reason: file '/home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv' is newer than expected.
+	expected: Wed Oct 15 18:02:07 2025
+	actual:   Wed Oct 15 18:02:46 2025
 file: /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv
 	module worklib.BubbleSort_tb:sv
 		errors: 0, warnings: 0
@@ -22,24 +22,20 @@ file: /home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv
 		BubbleSort_tb
 	Building instance overlay tables: .................... Done
 	Generating native compiled code:
-		worklib.ControlPath:v <0x69f02369>
-			streams:   4, words:  8465
-		worklib.DataPath:v <0x13dea224>
-			streams:  21, words:  6605
-		worklib.BubbleSort_tb:sv <0x7aedc266>
-			streams:  11, words: 28292
+		worklib.BubbleSort_tb:sv <0x32a15942>
+			streams:  11, words: 28289
 	Building instance specific data structures.
 	Loading native compiled code:     .................... Done
 	Design hierarchy summary:
 		              Instances  Unique
-		Modules:              7       5
-		Registers:           32      32
-		Scalar wires:        23       -
-		Vectored wires:      11       -
-		Always blocks:       11      11
+		Modules:              5       5
+		Registers:           37      37
+		Scalar wires:        16       -
+		Vectored wires:       7       -
+		Always blocks:        9       9
 		Initial blocks:       2       2
-		Cont. assignments:    6       9
-		Pseudo assignments:   9       -
+		Cont. assignments:    6      10
+		Pseudo assignments:   7       -
 	Writing initial simulation snapshot: worklib.BubbleSort_tb:sv
 Loading snapshot worklib.BubbleSort_tb:sv .................... Done
 xcelium> source /home/tools/cadence/installs/XCELIUM2303/tools/xcelium/files/xmsimrc
@@ -51,7 +47,7 @@ xcelium> run
 | INTPUT VECTOR:                               
 |
 | i=0 0000023a (570)
-| i=1 fffffd12 (-750)
+| i=1 fffffea5 (-347)
 | i=2 00000000 (0)
 | i=3 0000017f (383)
 | i=4 fffffea5 (-347)
@@ -62,10 +58,10 @@ xcelium> run
 | i=9 00000159 (345)
 +-----------------------
 | OUTPUT VECTOR:
-| CYCLES: 110
+| CYCLES: 103
 |
 | i=0 fffffc8f (-881)
-| i=1 fffffd12 (-750)
+| i=1 fffffea5 (-347)
 | i=2 fffffea5 (-347)
 | i=3 fffffee7 (-281)
 | i=4 00000000 (0)
@@ -79,7 +75,7 @@ xcelium> run
 +----------------------+
 
 
-Simulation complete via $finish(1) at time 1110 NS + 0
-/home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv:169     $finish;
+Simulation complete via $finish(1) at time 1040 NS + 0
+/home/schultz/Documents/ARQIII_Works/ACTV_05_Sort/HDL/BubbleSort_tb.sv:180     $finish;
 xcelium> exit
-TOOL:	xrun	23.03-s005: Exiting on Oct 02, 2025 at 13:01:52 -03  (total: 00:00:00)
+TOOL:	xrun	23.03-s005: Exiting on Oct 15, 2025 at 18:02:47 -03  (total: 00:00:00)
